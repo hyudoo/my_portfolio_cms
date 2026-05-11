@@ -1,0 +1,65 @@
+{
+  "layout": {
+    "nav": {
+      "dashboard": "Bảng điều khiển",
+      "users": "Người dùng",
+      "subscribers": "Đăng ký",
+      "skills": "Kỹ năng",
+      "projects": "Dự án",
+      "blogs": "Blog",
+      "docs": "Tài liệu kỹ thuật",
+      "messages": "Tin nhắn",
+      "analytics": "Thống kê",
+      "settings": "Cài đặt",
+      "logout": "Đăng xuất"
+    },
+    "drawer": {
+      "title": "Điều hướng"
+    },
+    "user": {
+      "profile": "Hồ sơ",
+      "updatePassword": "Đổi mật khẩu",
+      "logout": "Đăng xuất"
+    }
+  },
+  "dashboard": {
+    "title": "Bảng điều khiển",
+    "subtitle": "Chào mừng trở lại hệ thống quản lý portfolio của bạn",
+    "createNew": "Tạo mới",
+    "metrics": {
+      "totalUsers": "Tổng người dùng",
+      "totalUsersGrowth": "+24 trong tháng này",
+      "totalSubscribers": "Tổng đăng ký",
+      "totalSubscribersGrowth": "+15 trong tuần này",
+      "totalProjects": "Tổng dự án",
+      "totalProjectsGrowth": "+3 đang thực hiện",
+      "blogViews": "Lượt xem Blog",
+      "blogViewsGrowth": "+2300 trong tháng này"
+    },
+    "charts": {
+      "trafficOverview": "Tổng quan lưu lượng",
+      "monthlyGrowth": "Tăng trưởng hàng tháng"
+    },
+    "recentActivities": "Hoạt động gần đây",
+    "systemStatus": {
+      "title": "Trạng thái hệ thống",
+      "apiServer": "Máy chủ API",
+      "database": "Cơ sở dữ liệu",
+      "storage": "Lưu trữ",
+      "cache": "Bộ nhớ đệm",
+      "operational": "Hoạt động bình thường",
+      "maintenance": "Đang bảo trì"
+    },
+    "latestBlogPosts": {
+      "title": "Bài viết Blog mới nhất",
+      "viewAll": "Xem tất cả",
+      "colTitle": "Tiêu đề",
+      "colViews": "Lượt xem",
+      "colDate": "Ngày đăng"
+    },
+    "recentSubscribers": {
+      "title": "Đăng ký gần đây",
+      "viewAll": "Xem tất cả"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "layout": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "subscribers": "Subscribers",
+      "skills": "Skills",
+      "projects": "Projects",
+      "blogs": "Blogs",
+      "docs": "Technical Docs",
+      "messages": "Messages",
+      "analytics": "Analytics",
+      "settings": "Settings",
+      "logout": "Logout"
+    },
+    "drawer": {
+      "title": "Navigation"
+    },
+    "user": {
+      "profile": "Profile",
+      "updatePassword": "Update Password",
+      "logout": "Logout"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Welcome back to your portfolio management system",
+    "createNew": "Create New",
+    "metrics": {
+      "totalUsers": "Total Users",
+      "totalUsersGrowth": "+24 this month",
+      "totalSubscribers": "Total Subscribers",
+      "totalSubscribersGrowth": "+15 this week",
+      "totalProjects": "Total Projects",
+      "totalProjectsGrowth": "+3 in progress",
+      "blogViews": "Blog Views",
+      "blogViewsGrowth": "+2300 this month"
+    },
+    "charts": {
+      "trafficOverview": "Traffic Overview",
+      "monthlyGrowth": "Monthly Growth"
+    },
+    "recentActivities": "Recent Activities",
+    "systemStatus": {
+      "title": "System Status",
+      "apiServer": "API Server",
+      "database": "Database",
+      "storage": "Storage",
+      "cache": "Cache",
+      "operational": "Operational",
+      "maintenance": "Maintenance"
+    },
+    "latestBlogPosts": {
+      "title": "Latest Blog Posts",
+      "viewAll": "View All",
+      "colTitle": "Title",
+      "colViews": "Views",
+      "colDate": "Date"
+    },
+    "recentSubscribers": {
+      "title": "Recent Subscribers",
+      "viewAll": "View All"
+    }
+  }
+}
