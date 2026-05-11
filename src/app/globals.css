@@ -1,8 +1,15 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
 
+/* ─── Theme variables ────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f1f5f9;
+  --foreground: #0f172a;
+}
+
+.dark {
+  --background: #030712;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -12,15 +19,138 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ─── Ant Design — dark mode overrides ──────────────────── */
+/* ConfigProvider handles algorithms; these patch layout backgrounds */
+
+.dark :where(.ant-layout) {
+  @apply bg-neutral-950;
+}
+
+.dark :where(.ant-layout-sider) {
+  @apply bg-gray-900;
+}
+
+.dark :where(.ant-menu) {
+  @apply bg-gray-900;
+}
+
+.dark :where(.ant-layout-header) {
+  @apply bg-gray-900;
+}
+
+.dark :where(.ant-card) {
+  @apply bg-gray-900;
+}
+
+.dark :where(.ant-table) {
+  @apply bg-gray-900;
+}
+
+.dark :where(.ant-table-thead > tr > th) {
+  @apply bg-gray-800 text-neutral-300 border-neutral-700;
+}
+
+.dark :where(.ant-table-tbody > tr > td) {
+  @apply border-neutral-800;
+}
+
+.dark :where(.ant-table-row:hover > td) {
+  @apply bg-gray-800;
+}
+
+.dark :where(.ant-modal-content) {
+  @apply bg-gray-900;
+}
+
+.dark :where(.ant-drawer-content) {
+  @apply bg-gray-900;
+}
+
+.dark :where(.ant-input),
+.dark :where(.ant-select-selector),
+.dark :where(.ant-picker) {
+  @apply bg-gray-800 border-neutral-700 text-neutral-100;
+}
+
+/* ─── Ant Design — both modes ───────────────────────────── */
+:where(.ant-menu-item-selected) {
+  @apply !bg-sky-600 !text-white;
+}
+
+.dark :where(.ant-menu-item-selected) {
+  @apply !bg-sky-600 !text-white;
+}
+
+:where(.ant-btn-primary) {
+  @apply !bg-sky-600 hover:!bg-sky-700 !border-sky-600;
+}
+
+:where(.ant-tag) {
+  @apply border-0;
+}
+
+:where(.ant-statistic-title) {
+  @apply text-neutral-400;
+}
+
+/* Smooth transitions */
+*,
+*::before,
+*::after {
+  transition-property: color, background-color, border-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+.app-modal .ant-modal-content {
+  @apply p-0!;
+}
+
+.app-modal .ant-modal-close {
+  @apply top-5! right-5!;
+}
+
+.app-modal .ant-modal-header {
+  @apply bg-sky-600! p-12! mb-0!;
+}
+
+.app-modal .ant-modal-header .ant-modal-title {
+  @apply text-white;
+}
+
+.app-modal .ant-modal-header:has(.icon) {
+  @apply bg-white! p-12! mb-0!;
+}
+
+.app-modal .ant-modal-header:has(.icon) .ant-modal-title {
+  @apply text-[#000000D9];
+}
+
+.app-modal .ant-modal-body {
+  @apply p-12!;
+}
+
+.app-modal .ant-modal-footer {
+  @apply p-10! flex;
+}
+
+.app-modal .ant-modal-footer .ant-btn[hidden] {
+  @apply hidden;
+}
+
+.app-modal .ant-modal-footer .ant-btn[hidden] + .ant-btn {
+  @apply ml-0!;
+}
+
+.app-modal .ant-modal-footer .ant-btn {
+  @apply flex-1 h-54;
 }

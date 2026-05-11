@@ -18,48 +18,48 @@
     },
     "user": {
       "profile": "Profile",
-      "updatePassword": "Update Password",
+      "update_password": "Update Password",
       "logout": "Logout"
     }
   },
   "dashboard": {
     "title": "Dashboard",
     "subtitle": "Welcome back to your portfolio management system",
-    "createNew": "Create New",
+    "create_new": "Create New",
     "metrics": {
-      "totalUsers": "Total Users",
-      "totalUsersGrowth": "+24 this month",
-      "totalSubscribers": "Total Subscribers",
-      "totalSubscribersGrowth": "+15 this week",
-      "totalProjects": "Total Projects",
-      "totalProjectsGrowth": "+3 in progress",
-      "blogViews": "Blog Views",
-      "blogViewsGrowth": "+2300 this month"
+      "total_users": "Total Users",
+      "total_users_growth": "+24 this month",
+      "total_subscribers": "Total Subscribers",
+      "total_subscribers_growth": "+15 this week",
+      "total_projects": "Total Projects",
+      "total_projects_growth": "+3 in progress",
+      "blog_views": "Blog Views",
+      "blog_views_growth": "+2300 this month"
     },
     "charts": {
-      "trafficOverview": "Traffic Overview",
-      "monthlyGrowth": "Monthly Growth"
+      "traffic_overview": "Traffic Overview",
+      "monthly_growth": "Monthly Growth"
     },
-    "recentActivities": "Recent Activities",
-    "systemStatus": {
+    "recent_activities": "Recent Activities",
+    "system_status": {
       "title": "System Status",
-      "apiServer": "API Server",
+      "api_server": "API Server",
       "database": "Database",
       "storage": "Storage",
       "cache": "Cache",
       "operational": "Operational",
       "maintenance": "Maintenance"
     },
-    "latestBlogPosts": {
+    "latest_blog_posts": {
       "title": "Latest Blog Posts",
-      "viewAll": "View All",
-      "colTitle": "Title",
-      "colViews": "Views",
-      "colDate": "Date"
+      "view_all": "View All",
+      "col_title": "Title",
+      "col_views": "Views",
+      "col_date": "Date"
     },
-    "recentSubscribers": {
+    "recent_subscribers": {
       "title": "Recent Subscribers",
-      "viewAll": "View All"
+      "view_all": "View All"
     }
   }
 }

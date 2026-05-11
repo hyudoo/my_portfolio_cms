@@ -18,48 +18,48 @@
     },
     "user": {
       "profile": "Hồ sơ",
-      "updatePassword": "Đổi mật khẩu",
+      "update_password": "Đổi mật khẩu",
       "logout": "Đăng xuất"
     }
   },
   "dashboard": {
     "title": "Bảng điều khiển",
     "subtitle": "Chào mừng trở lại hệ thống quản lý portfolio của bạn",
-    "createNew": "Tạo mới",
+    "create_new": "Tạo mới",
     "metrics": {
-      "totalUsers": "Tổng người dùng",
-      "totalUsersGrowth": "+24 trong tháng này",
-      "totalSubscribers": "Tổng đăng ký",
-      "totalSubscribersGrowth": "+15 trong tuần này",
-      "totalProjects": "Tổng dự án",
-      "totalProjectsGrowth": "+3 đang thực hiện",
-      "blogViews": "Lượt xem Blog",
-      "blogViewsGrowth": "+2300 trong tháng này"
+      "total_users": "Tổng người dùng",
+      "total_users_growth": "+24 trong tháng này",
+      "total_subscribers": "Tổng đăng ký",
+      "total_subscribers_growth": "+15 trong tuần này",
+      "total_projects": "Tổng dự án",
+      "total_projects_growth": "+3 đang thực hiện",
+      "blog_views": "Lượt xem Blog",
+      "blog_views_growth": "+2300 trong tháng này"
     },
     "charts": {
-      "trafficOverview": "Tổng quan lưu lượng",
-      "monthlyGrowth": "Tăng trưởng hàng tháng"
+      "traffic_overview": "Tổng quan lưu lượng",
+      "monthly_growth": "Tăng trưởng hàng tháng"
     },
-    "recentActivities": "Hoạt động gần đây",
-    "systemStatus": {
+    "recent_activities": "Hoạt động gần đây",
+    "system_status": {
       "title": "Trạng thái hệ thống",
-      "apiServer": "Máy chủ API",
+      "api_server": "Máy chủ API",
       "database": "Cơ sở dữ liệu",
       "storage": "Lưu trữ",
       "cache": "Bộ nhớ đệm",
       "operational": "Hoạt động bình thường",
       "maintenance": "Đang bảo trì"
     },
-    "latestBlogPosts": {
+    "latest_blog_posts": {
       "title": "Bài viết Blog mới nhất",
-      "viewAll": "Xem tất cả",
-      "colTitle": "Tiêu đề",
-      "colViews": "Lượt xem",
-      "colDate": "Ngày đăng"
+      "view_all": "Xem tất cả",
+      "col_title": "Tiêu đề",
+      "col_views": "Lượt xem",
+      "col_date": "Ngày đăng"
     },
-    "recentSubscribers": {
+    "recent_subscribers": {
       "title": "Đăng ký gần đây",
-      "viewAll": "Xem tất cả"
+      "view_all": "Xem tất cả"
     }
   }
 }
