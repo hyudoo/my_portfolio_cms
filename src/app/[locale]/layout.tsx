@@ -4,7 +4,7 @@ import '../globals.css';
 import { AppLayout } from '@/components/layouts/app-layout/AppLayout';
 import { AuthProvider } from '@/components/auth-provider/AuthProvider';
 import { NextIntlClientProvider } from 'next-intl';
-import { ThemeProvider } from 'next-themes';
+import { ThemeProvider } from '@/components/theme-provider';
 import { getMessages } from 'next-intl/server';
 import { concurrent } from '@/utils/concurrent.util';
 import { getAuthInfo } from '@/utils/get-auth-info.util';
@@ -38,14 +38,14 @@ export default async function LocaleLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
-        <AuthProvider auth={auth}>
-          <NextIntlClientProvider messages={messages}>
-            <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
+          <AuthProvider auth={auth}>
+            <NextIntlClientProvider messages={messages}>
               <AppLayout>{children}</AppLayout>
-            </ThemeProvider>
-          </NextIntlClientProvider>
-        </AuthProvider>
+            </NextIntlClientProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
