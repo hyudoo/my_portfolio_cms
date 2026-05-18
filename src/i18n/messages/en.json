@@ -20,6 +20,19 @@
       "profile": "Profile",
       "update_password": "Update Password",
       "logout": "Logout"
+    },
+    "sidebar": {
+      "section_main": "Main",
+      "section_content": "Content",
+      "section_other": "Other"
+    },
+    "header": {
+      "search_placeholder": "Search...",
+      "search_dialog_placeholder": "Search dashboard, docs, users...",
+      "quick_actions": "Quick Actions",
+      "new_user": "New User",
+      "new_project": "New Project",
+      "new_blog_post": "New Blog Post"
     }
   },
   "dashboard": {
@@ -48,7 +61,9 @@
       "storage": "Storage",
       "cache": "Cache",
       "operational": "Operational",
-      "maintenance": "Maintenance"
+      "maintenance": "Maintenance",
+      "last_updated": "Last updated 2 minutes ago",
+      "view_details": "View Details"
     },
     "latest_blog_posts": {
       "title": "Latest Blog Posts",
@@ -60,6 +75,7 @@
     "recent_subscribers": {
       "title": "Recent Subscribers",
       "view_all": "View All"
-    }
+    },
+    "view_all": "View All"
   }
 }

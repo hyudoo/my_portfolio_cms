@@ -20,6 +20,19 @@
       "profile": "Hồ sơ",
       "update_password": "Đổi mật khẩu",
       "logout": "Đăng xuất"
+    },
+    "sidebar": {
+      "section_main": "Chính",
+      "section_content": "Nội dung",
+      "section_other": "Khác"
+    },
+    "header": {
+      "search_placeholder": "Tìm kiếm...",
+      "search_dialog_placeholder": "Tìm bảng điều khiển, tài liệu, người dùng...",
+      "quick_actions": "Thao tác nhanh",
+      "new_user": "Người dùng mới",
+      "new_project": "Dự án mới",
+      "new_blog_post": "Bài viết mới"
     }
   },
   "dashboard": {
@@ -48,7 +61,9 @@
       "storage": "Lưu trữ",
       "cache": "Bộ nhớ đệm",
       "operational": "Hoạt động bình thường",
-      "maintenance": "Đang bảo trì"
+      "maintenance": "Đang bảo trì",
+      "last_updated": "Cập nhật lần cuối 2 phút trước",
+      "view_details": "Xem chi tiết"
     },
     "latest_blog_posts": {
       "title": "Bài viết Blog mới nhất",
@@ -60,6 +75,7 @@
     "recent_subscribers": {
       "title": "Đăng ký gần đây",
       "view_all": "Xem tất cả"
-    }
+    },
+    "view_all": "Xem tất cả"
   }
 }
