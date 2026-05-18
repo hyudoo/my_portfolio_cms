@@ -1,156 +1,242 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
 @custom-variant dark (&:is(.dark *));
 
-/* ─── Theme variables ────────────────────────────────────── */
 :root {
-  --background: #f1f5f9;
-  --foreground: #0f172a;
+  /* Dark mode first - these are the light mode values */
+  --background: oklch(0.985 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.55 0.25 270);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.94 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.55 0.25 270);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.55 0.25 270);
+  --radius: 0.75rem;
+
+  /* Chart colors */
+  --chart-1: oklch(0.55 0.25 270);
+  --chart-2: oklch(0.65 0.2 200);
+  --chart-3: oklch(0.7 0.15 150);
+  --chart-4: oklch(0.75 0.18 80);
+  --chart-5: oklch(0.6 0.22 330);
+
+  /* Sidebar */
+  --sidebar: oklch(0.98 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.55 0.25 270);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.94 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.9 0 0);
+  --sidebar-ring: oklch(0.55 0.25 270);
+
+  /* Custom portfolio tokens */
+  --glow: oklch(0.55 0.25 270 / 0.5);
+  --glass: oklch(1 0 0 / 0.8);
+  --glass-border: oklch(0.9 0 0 / 0.5);
 }
 
 .dark {
-  --background: #030712;
-  --foreground: #ededed;
+  --background: oklch(0.09 0.01 270);
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.12 0.01 270);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.12 0.01 270);
+  --popover-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.65 0.28 270);
+  --primary-foreground: oklch(0.12 0 0);
+  --secondary: oklch(0.18 0.01 270);
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.2 0.01 270);
+  --muted-foreground: oklch(0.65 0 0);
+  --accent: oklch(0.65 0.28 270);
+  --accent-foreground: oklch(0.12 0 0);
+  --destructive: oklch(0.5 0.2 25);
+  --destructive-foreground: oklch(0.95 0 0);
+  --border: oklch(0.22 0.01 270);
+  --input: oklch(0.22 0.01 270);
+  --ring: oklch(0.65 0.28 270);
+
+  /* Chart colors */
+  --chart-1: oklch(0.65 0.28 270);
+  --chart-2: oklch(0.55 0.22 200);
+  --chart-3: oklch(0.6 0.18 150);
+  --chart-4: oklch(0.7 0.2 80);
+  --chart-5: oklch(0.55 0.25 330);
+
+  /* Sidebar */
+  --sidebar: oklch(0.12 0.01 270);
+  --sidebar-foreground: oklch(0.95 0 0);
+  --sidebar-primary: oklch(0.65 0.28 270);
+  --sidebar-primary-foreground: oklch(0.12 0 0);
+  --sidebar-accent: oklch(0.18 0.01 270);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-border: oklch(0.22 0.01 270);
+  --sidebar-ring: oklch(0.65 0.28 270);
+
+  /* Custom portfolio tokens */
+  --glow: oklch(0.65 0.28 270 / 0.4);
+  --glass: oklch(0.15 0.01 270 / 0.8);
+  --glass-border: oklch(0.3 0.02 270 / 0.5);
 }
 
 @theme inline {
+  --font-sans: 'Geist', 'Geist Fallback', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-glow: var(--glow);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
 }
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-/* ─── Ant Design — dark mode overrides ──────────────────── */
-/* ConfigProvider handles algorithms; these patch layout backgrounds */
-
-.dark :where(.ant-layout) {
-  @apply bg-neutral-950;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.dark :where(.ant-layout-sider) {
-  @apply bg-gray-900;
+::-webkit-scrollbar-thumb {
+  background: oklch(0.4 0 0 / 0.3);
+  border-radius: 4px;
 }
 
-.dark :where(.ant-menu) {
-  @apply bg-gray-900;
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.5 0 0 / 0.5);
 }
 
-.dark :where(.ant-layout-header) {
-  @apply bg-gray-900;
+/* Selection color */
+::selection {
+  background: oklch(0.65 0.28 270 / 0.3);
 }
 
-.dark :where(.ant-card) {
-  @apply bg-gray-900;
+/* Glow effect utility */
+.glow {
+  box-shadow: 0 0 40px var(--glow);
 }
 
-.dark :where(.ant-table) {
-  @apply bg-gray-900;
+.glow-sm {
+  box-shadow: 0 0 20px var(--glow);
 }
 
-.dark :where(.ant-table-thead > tr > th) {
-  @apply bg-gray-800 text-neutral-300 border-neutral-700;
+/* Glass effect */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
 }
 
-.dark :where(.ant-table-tbody > tr > td) {
-  @apply border-neutral-800;
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, oklch(0.65 0.28 270), oklch(0.7 0.2 220));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.dark :where(.ant-table-row:hover > td) {
-  @apply bg-gray-800;
+/* Animated gradient background */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
-.dark :where(.ant-modal-content) {
-  @apply bg-gray-900;
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
 }
 
-.dark :where(.ant-drawer-content) {
-  @apply bg-gray-900;
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-.dark :where(.ant-input),
-.dark :where(.ant-select-selector),
-.dark :where(.ant-picker) {
-  @apply bg-gray-800 border-neutral-700 text-neutral-100;
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
 
-/* ─── Ant Design — both modes ───────────────────────────── */
-:where(.ant-menu-item-selected) {
-  @apply !bg-sky-600 !text-white;
+/* Pulse glow animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
 }
 
-.dark :where(.ant-menu-item-selected) {
-  @apply !bg-sky-600 !text-white;
-}
-
-:where(.ant-btn-primary) {
-  @apply !bg-sky-600 hover:!bg-sky-700 !border-sky-600;
-}
-
-:where(.ant-tag) {
-  @apply border-0;
-}
-
-:where(.ant-statistic-title) {
-  @apply text-neutral-400;
-}
-
-/* Smooth transitions */
-*,
-*::before,
-*::after {
-  transition-property: color, background-color, border-color;
-  transition-duration: 200ms;
-  transition-timing-function: ease;
-}
-
-.app-modal .ant-modal-content {
-  @apply p-0!;
-}
-
-.app-modal .ant-modal-close {
-  @apply top-5! right-5!;
-}
-
-.app-modal .ant-modal-header {
-  @apply bg-sky-600! p-12! mb-0!;
-}
-
-.app-modal .ant-modal-header .ant-modal-title {
-  @apply text-white;
-}
-
-.app-modal .ant-modal-header:has(.icon) {
-  @apply bg-white! p-12! mb-0!;
-}
-
-.app-modal .ant-modal-header:has(.icon) .ant-modal-title {
-  @apply text-[#000000D9];
-}
-
-.app-modal .ant-modal-body {
-  @apply p-12!;
-}
-
-.app-modal .ant-modal-footer {
-  @apply p-10! flex;
-}
-
-.app-modal .ant-modal-footer .ant-btn[hidden] {
-  @apply hidden;
-}
-
-.app-modal .ant-modal-footer .ant-btn[hidden] + .ant-btn {
-  @apply ml-0!;
-}
-
-.app-modal .ant-modal-footer .ant-btn {
-  @apply flex-1 h-54;
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }
