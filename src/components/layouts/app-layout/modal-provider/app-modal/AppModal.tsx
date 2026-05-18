@@ -1,50 +1,127 @@
 'use client';
 
-import { Modal, ModalProps } from 'antd';
-import { ButtonProps } from 'antd/lib';
-import classNames from 'classnames';
+import * as Dialog from '@radix-ui/react-dialog';
+import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
-import { CloseOutlined } from '@ant-design/icons';
+import { X } from 'lucide-react';
+import { ReactNode } from 'react';
 
-export type AppModalProps = ModalProps & {
-  onClose?: ModalProps['onCancel'];
+export type AppModalProps = {
+  open?: boolean;
+  title?: ReactNode;
+  children?: ReactNode;
+  onOk?: (e?: React.MouseEvent<HTMLButtonElement>) => void | Promise<void>;
+  onCancel?: (e?: React.MouseEvent<HTMLButtonElement>) => void | Promise<void>;
+  onClose?: (e?: React.MouseEvent<HTMLButtonElement>) => void | Promise<void>;
+  okText?: string;
+  cancelText?: string;
+  okButtonProps?: { loading?: boolean; hidden?: boolean; disabled?: boolean };
+  cancelButtonProps?: { loading?: boolean; hidden?: boolean };
+  centered?: boolean;
+  className?: string;
+  icon?: ReactNode;
+  width?: string | number;
+  footer?: ReactNode | null;
 };
 
-export const AppModal: React.FC<AppModalProps> = (props) => {
-  const {
-    className: _className,
-    okText: _okText,
-    cancelText: _cancelText,
-    cancelButtonProps: _cancelButtonProps,
-    onCancel,
-    onClose,
-    ...otherProps
-  } = props;
-
+export const AppModal: React.FC<AppModalProps> = ({
+  open,
+  title,
+  children,
+  onOk,
+  onCancel,
+  onClose,
+  okText: _okText,
+  cancelText: _cancelText,
+  okButtonProps,
+  cancelButtonProps,
+  className,
+  icon,
+  width = 520,
+  footer,
+}) => {
   const t = useTranslations();
-
-  const className = useMemo(() => classNames('app-modal', _className), [_className]);
-  const okText = useMemo(() => _okText ?? t('common.yes'), [_okText, t]);
-  const cancelText = useMemo(() => _cancelText ?? t('common.cancel'), [_cancelText, t]);
-  const cancelButtonProps = useMemo<ButtonProps>(
-    () => ({
-      onClick: (e) => (onCancel ?? onClose)?.(e as React.MouseEvent<HTMLButtonElement>),
-      ..._cancelButtonProps,
-    }),
-    [_cancelButtonProps, onCancel, onClose],
-  );
+  const okText = _okText ?? t('common.yes');
+  const cancelText = _cancelText ?? t('common.cancel');
+  const handleClose = () => (onClose ?? onCancel)?.();
 
   return (
-    <Modal
-      className={className}
-      okText={okText}
-      cancelText={cancelText}
-      cancelButtonProps={cancelButtonProps}
-      onCancel={onClose ?? onCancel}
-      maskClosable={false}
-      closeIcon={<CloseOutlined color="white" size={24} />}
-      {...otherProps}
-    />
+    <Dialog.Root open={open}>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50" />
+        <Dialog.Content
+          className={clsx(
+            'fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 rounded-xl shadow-xl overflow-hidden',
+            'bg-white dark:bg-gray-900',
+            className,
+          )}
+          style={{ width, maxWidth: 'calc(100vw - 32px)' }}
+          onInteractOutside={(e) => e.preventDefault()}
+          aria-describedby={undefined}
+        >
+          {/* Header */}
+          <div
+            className={clsx(
+              'flex items-center justify-between px-12 py-5',
+              icon ? 'bg-white dark:bg-gray-900' : 'bg-sky-600',
+            )}
+          >
+            <Dialog.Title
+              className={clsx(
+                'font-semibold text-base flex items-center gap-2',
+                icon ? 'text-neutral-900 dark:text-white' : 'text-white',
+              )}
+            >
+              {icon && <span className="icon">{icon}</span>}
+              {title}
+            </Dialog.Title>
+            <button
+              onClick={handleClose}
+              className={clsx(
+                'p-1 rounded transition-colors',
+                icon
+                  ? 'text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'
+                  : 'text-white/80 hover:text-white',
+              )}
+            >
+              <X size={18} />
+            </button>
+          </div>
+
+          {/* Body */}
+          <div className="px-12 py-10">{children}</div>
+
+          {/* Footer */}
+          {footer !== null && (
+            <div className="px-10 pb-10 flex gap-2">
+              {footer ?? (
+                <>
+                  {!cancelButtonProps?.hidden && (
+                    <button
+                      onClick={onClose ?? onCancel}
+                      className="flex-1 h-13.5 px-4 rounded-lg border border-neutral-300 dark:border-neutral-600 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+                    >
+                      {cancelText}
+                    </button>
+                  )}
+                  {!okButtonProps?.hidden && (
+                    <button
+                      onClick={onOk}
+                      disabled={okButtonProps?.disabled || okButtonProps?.loading}
+                      className="flex-1 h-13.5 px-4 rounded-lg bg-sky-600 hover:bg-sky-700 text-white text-sm font-medium transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                      {okButtonProps?.loading && (
+                        <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      )}
+                      {okText}
+                    </button>
+                  )}
+                </>
+              )}
+            </div>
+          )}
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };
