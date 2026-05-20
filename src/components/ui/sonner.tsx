@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { useTheme } from '@/components/theme-provider'
-import { Toaster as Sonner, ToasterProps } from 'sonner'
+import { useTheme } from '@/components/providers/theme-provider/ThemeProvider';
+import { Toaster as Sonner, ToasterProps } from 'sonner';
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  const { resolvedTheme: theme = 'dark' } = useTheme()
+  const { resolvedTheme: theme = 'dark' } = useTheme();
 
   return (
     <Sonner
@@ -19,7 +19,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
       }
       {...props}
     />
-  )
-}
+  );
+};
 
-export { Toaster }
+export { Toaster };

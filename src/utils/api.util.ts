@@ -1,5 +1,6 @@
 import axios, { AxiosError, CreateAxiosDefaults } from 'axios';
-import { apiNotify } from '../components/notify-provider/api-notify/apiNotify';
+import { getSession } from 'next-auth/react';
+import { apiNotify } from '../components/providers/notify-provider/api-notify/apiNotify';
 
 declare module 'axios' {
   interface AxiosRequestConfig {
@@ -46,4 +47,12 @@ export const api = createApiInstance({
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
+});
+
+api.interceptors.request.use(async (config) => {
+  const session = await getSession();
+  if (session?.accessToken) {
+    config.headers.Authorization = `Bearer ${session.accessToken}`;
+  }
+  return config;
 });

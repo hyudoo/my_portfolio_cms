@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import '../globals.css';
 import { AppLayout } from '@/components/layouts/app-layout/AppLayout';
-import { AuthProvider } from '@/components/auth-provider/AuthProvider';
+import { AuthProvider } from '@/components/providers/auth-provider/AuthProvider';
 import { NextIntlClientProvider } from 'next-intl';
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from '@/components/providers/theme-provider/ThemeProvider';
 import { getMessages } from 'next-intl/server';
 import { concurrent } from '@/utils/concurrent.util';
 import { getAuthInfo } from '@/utils/get-auth-info.util';
@@ -40,7 +40,7 @@ export default async function LocaleLayout({
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
-          <AuthProvider auth={auth}>
+          <AuthProvider>
             <NextIntlClientProvider messages={messages}>
               <AppLayout>{children}</AppLayout>
             </NextIntlClientProvider>

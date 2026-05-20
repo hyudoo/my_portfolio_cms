@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect } from 'react';
-import { NotifyProvider } from '../../notify-provider/NotifyProvider';
+import { NotifyProvider } from '../../providers/notify-provider/NotifyProvider';
 import { Provider } from 'react-redux';
 import { store } from '../../../redux/store';
 import { StorageKey } from '../../../enums/storage-key.enum';

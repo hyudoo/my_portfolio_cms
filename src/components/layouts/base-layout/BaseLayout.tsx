@@ -26,7 +26,7 @@ import {
   Menu,
   X,
 } from 'lucide-react';
-import { useTheme } from '@/components/theme-provider';
+import { useTheme } from '@/components/providers/theme-provider/ThemeProvider';
 import { motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 import { Language } from '@/enums/language.enum';
@@ -228,22 +228,25 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                   sideOffset={4}
                   className="z-50 min-w-[130px] rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-gray-900 p-1 shadow-lg"
                 >
-                  {([{ key: Language.En, label: 'English' }, { key: Language.Vi, label: 'Tiếng Việt' }] as const).map(
-                    ({ key, label }) => (
-                      <DropdownMenu.Item
-                        key={key}
-                        onSelect={() => handleLocaleChange(key)}
-                        className={clsx(
-                          'px-3 py-1.5 rounded text-sm cursor-pointer outline-none transition-colors',
-                          locale === key
-                            ? 'bg-sky-600 text-white'
-                            : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800',
-                        )}
-                      >
-                        {label}
-                      </DropdownMenu.Item>
-                    ),
-                  )}
+                  {(
+                    [
+                      { key: Language.En, label: 'English' },
+                      { key: Language.Vi, label: 'Tiếng Việt' },
+                    ] as const
+                  ).map(({ key, label }) => (
+                    <DropdownMenu.Item
+                      key={key}
+                      onSelect={() => handleLocaleChange(key)}
+                      className={clsx(
+                        'px-3 py-1.5 rounded text-sm cursor-pointer outline-none transition-colors',
+                        locale === key
+                          ? 'bg-sky-600 text-white'
+                          : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800',
+                      )}
+                    >
+                      {label}
+                    </DropdownMenu.Item>
+                  ))}
                 </DropdownMenu.Content>
               </DropdownMenu.Portal>
             </DropdownMenu.Root>
