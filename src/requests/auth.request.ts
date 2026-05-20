@@ -1,20 +1,18 @@
+import { signIn, signOut } from 'next-auth/react';
 import {
-  AuthUser,
   LoginBody,
-  LoginResponse,
   RegisterBody,
   ResendVerifyEmailBody,
+  ResetPasswordBody,
   UpdateInfoBody,
   UpdatePasswordBody,
   VerifyEmailBody,
 } from '../types/requests/auth.type';
 import { api } from '../utils/api.util';
-import { serverApi } from '../utils/server-api.util';
 
 export const authRequest = {
   login: async (body: LoginBody) => {
-    const { data } = await api.post<LoginResponse>('/auth/login', body);
-    return data;
+    return signIn('credentials', { ...body, redirect: false });
   },
 
   register: async (body: RegisterBody) => {
@@ -32,16 +30,6 @@ export const authRequest = {
     return data;
   },
 
-  me: async () => {
-    const { data } = await api.get<AuthUser>('/auth/me');
-    return data;
-  },
-
-  serverMe: async () => {
-    const { data } = await (await serverApi()).get<AuthUser>(`/auth/me`);
-    return data;
-  },
-
   updateInfo: async (body: UpdateInfoBody) => {
     const { data } = await api.put('/auth/update-info', body);
     return data;
@@ -52,8 +40,12 @@ export const authRequest = {
     return data;
   },
 
-  logout: async () => {
-    const { data } = await api.post('/auth/logout');
+  resetPassword: async (body: ResetPasswordBody) => {
+    const { data } = await api.post('/auth/reset-password', body);
     return data;
+  },
+
+  logout: async () => {
+    return signOut({ redirect: false });
   },
 };

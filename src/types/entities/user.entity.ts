@@ -1,8 +1,8 @@
-import { BaseEntity } from "./_base.entity";
+import { BaseEntity } from './_base.entity';
 
 export type UserEntity = BaseEntity & {
-  email: string;
   username: string;
+  email: string;
   isActive: boolean;
   deletedAt?: string | null;
 };

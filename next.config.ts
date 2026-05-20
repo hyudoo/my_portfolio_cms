@@ -12,8 +12,8 @@ const nextConfig: NextConfig = {
     if (!process.env.NEXT_PROXY_URL) return [];
     return [
       {
-        source: '/api/:path*',
-        destination: `${process.env.NEXT_PROXY_URL}/api/:path*`,
+        source: '/api/:path((?!next-auth).+)',
+        destination: `${process.env.NEXT_PROXY_URL}/api/:path`,
       },
     ];
   },
