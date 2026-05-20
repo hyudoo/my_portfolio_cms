@@ -20,6 +20,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { logoutAction } from '@/actions/auth.action';
 
 const MENU_SECTIONS = [
   {
@@ -107,6 +108,7 @@ export function DashboardSidebar() {
         <Button
           variant="ghost"
           className="w-full justify-start gap-3 h-10 rounded-lg text-destructive hover:text-destructive hover:bg-destructive/10"
+          onClick={() => logoutAction()}
         >
           <LogOut className="w-4 h-4" />
           <span className="text-sm">{t('nav.logout')}</span>

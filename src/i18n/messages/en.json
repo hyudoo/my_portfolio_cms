@@ -1,4 +1,81 @@
 {
+  "auth": {
+    "email": "Email",
+    "email_placeholder": "you@example.com",
+    "password": "Password",
+    "password_placeholder": "Enter your password",
+    "or_continue_with": "or continue with",
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your account to continue",
+      "submit": "Sign in",
+      "remember_me": "Remember me",
+      "forgot_password": "Forgot password?",
+      "no_account": "Don't have an account?",
+      "link_register": "Register",
+      "error": "Invalid email or password"
+    },
+    "register": {
+      "title": "Create account",
+      "subtitle": "Get started with your portfolio CMS",
+      "submit": "Create account",
+      "has_account": "Already have an account?",
+      "link_login": "Sign in",
+      "name": "Full name",
+      "name_placeholder": "John Doe",
+      "username": "Username",
+      "username_placeholder": "johndoe",
+      "confirm_password": "Confirm password",
+      "confirm_password_placeholder": "Re-enter your password",
+      "success": "Account created! Please sign in.",
+      "error": "Registration failed. Please try again."
+    },
+    "forgot_password": {
+      "title": "Forgot password",
+      "subtitle": "Enter your email and we'll send you a reset link",
+      "submit": "Send reset link",
+      "back_to_login": "Back to sign in",
+      "success_title": "Check your email",
+      "success_subtitle": "We've sent a password reset link to {email}",
+      "success_back": "Back to sign in",
+      "error": "Failed to send reset link. Please try again."
+    },
+    "reset_password": {
+      "title": "Reset password",
+      "subtitle": "Create a new password for your account",
+      "new_password": "New password",
+      "new_password_placeholder": "Enter new password",
+      "confirm_password": "Confirm new password",
+      "confirm_password_placeholder": "Re-enter new password",
+      "submit": "Reset password",
+      "back_to_login": "Back to sign in",
+      "success_title": "Password reset successful",
+      "success_subtitle": "Your password has been changed successfully. You can now sign in.",
+      "success_back": "Sign in",
+      "error": "Failed to reset password. The link may have expired.",
+      "invalid_token": "Invalid or expired password reset link."
+    },
+    "validation": {
+      "email_required": "Please enter your email",
+      "email_invalid": "Please enter a valid email",
+      "password_required": "Please enter your password",
+      "password_min_length": "Password must be at least 8 characters",
+      "name_required": "Please enter your full name",
+      "username_required": "Please enter a username",
+      "confirm_password_required": "Please confirm your password",
+      "confirm_password_mismatch": "Passwords do not match"
+    },
+    "brand": {
+      "app_name": "Portfolio",
+      "cms_admin": "CMS Admin",
+      "tagline": "Manage your portfolio with ease",
+      "description": "A powerful content management system for your professional portfolio.",
+      "feature_1": "Manage projects & skills",
+      "feature_2": "Track blog analytics",
+      "feature_3": "Handle subscriber list",
+      "footer_quote": "Your portfolio, your story — managed beautifully."
+    }
+  },
   "layout": {
     "nav": {
       "dashboard": "Dashboard",

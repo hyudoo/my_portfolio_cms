@@ -1,4 +1,81 @@
 {
+  "auth": {
+    "email": "Email",
+    "email_placeholder": "ban@example.com",
+    "password": "Mật khẩu",
+    "password_placeholder": "Nhập mật khẩu của bạn",
+    "or_continue_with": "hoặc tiếp tục với",
+    "login": {
+      "title": "Chào mừng trở lại",
+      "subtitle": "Đăng nhập vào tài khoản của bạn để tiếp tục",
+      "submit": "Đăng nhập",
+      "remember_me": "Ghi nhớ đăng nhập",
+      "forgot_password": "Quên mật khẩu?",
+      "no_account": "Chưa có tài khoản?",
+      "link_register": "Đăng ký",
+      "error": "Email hoặc mật khẩu không đúng"
+    },
+    "register": {
+      "title": "Tạo tài khoản",
+      "subtitle": "Bắt đầu quản lý portfolio của bạn",
+      "submit": "Tạo tài khoản",
+      "has_account": "Đã có tài khoản?",
+      "link_login": "Đăng nhập",
+      "name": "Họ và tên",
+      "name_placeholder": "Nguyễn Văn A",
+      "username": "Tên người dùng",
+      "username_placeholder": "nguyenvana",
+      "confirm_password": "Xác nhận mật khẩu",
+      "confirm_password_placeholder": "Nhập lại mật khẩu",
+      "success": "Tạo tài khoản thành công! Vui lòng đăng nhập.",
+      "error": "Tạo tài khoản thất bại. Vui lòng thử lại."
+    },
+    "forgot_password": {
+      "title": "Quên mật khẩu",
+      "subtitle": "Nhập email của bạn và chúng tôi sẽ gửi link đặt lại mật khẩu",
+      "submit": "Gửi link đặt lại",
+      "back_to_login": "Quay lại đăng nhập",
+      "success_title": "Kiểm tra email của bạn",
+      "success_subtitle": "Chúng tôi đã gửi link đặt lại mật khẩu đến {email}",
+      "success_back": "Quay lại đăng nhập",
+      "error": "Gửi link thất bại. Vui lòng thử lại."
+    },
+    "reset_password": {
+      "title": "Đặt lại mật khẩu",
+      "subtitle": "Tạo mật khẩu mới cho tài khoản của bạn",
+      "new_password": "Mật khẩu mới",
+      "new_password_placeholder": "Nhập mật khẩu mới",
+      "confirm_password": "Xác nhận mật khẩu mới",
+      "confirm_password_placeholder": "Nhập lại mật khẩu mới",
+      "submit": "Đặt lại mật khẩu",
+      "back_to_login": "Quay lại đăng nhập",
+      "success_title": "Mật khẩu đã được đặt lại",
+      "success_subtitle": "Mật khẩu của bạn đã được thay đổi thành công. Bạn có thể đăng nhập ngay bây giờ.",
+      "success_back": "Đăng nhập",
+      "error": "Đặt lại mật khẩu thất bại. Link có thể đã hết hạn.",
+      "invalid_token": "Link đặt lại mật khẩu không hợp lệ hoặc đã hết hạn."
+    },
+    "validation": {
+      "email_required": "Vui lòng nhập email",
+      "email_invalid": "Vui lòng nhập email hợp lệ",
+      "password_required": "Vui lòng nhập mật khẩu",
+      "password_min_length": "Mật khẩu phải có ít nhất 8 ký tự",
+      "name_required": "Vui lòng nhập họ và tên",
+      "username_required": "Vui lòng nhập tên người dùng",
+      "confirm_password_required": "Vui lòng xác nhận mật khẩu",
+      "confirm_password_mismatch": "Mật khẩu không khớp"
+    },
+    "brand": {
+      "app_name": "Portfolio",
+      "cms_admin": "CMS Admin",
+      "tagline": "Quản lý portfolio của bạn dễ dàng",
+      "description": "Hệ thống quản lý nội dung mạnh mẽ cho portfolio chuyên nghiệp của bạn.",
+      "feature_1": "Quản lý dự án & kỹ năng",
+      "feature_2": "Theo dõi thống kê blog",
+      "feature_3": "Quản lý danh sách đăng ký",
+      "footer_quote": "Portfolio của bạn, câu chuyện của bạn — được quản lý tuyệt vời."
+    }
+  },
   "layout": {
     "nav": {
       "dashboard": "Bảng điều khiển",
