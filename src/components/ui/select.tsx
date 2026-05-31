@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import * as SelectPrimitive from '@radix-ui/react-select'
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon, XIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
@@ -28,9 +28,11 @@ function SelectTrigger({
   className,
   size = 'default',
   children,
+  onClear,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
   size?: 'sm' | 'default'
+  onClear?: () => void
 }) {
   return (
     <SelectPrimitive.Trigger
@@ -43,9 +45,21 @@ function SelectTrigger({
       {...props}
     >
       {children}
-      <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon className="size-4 opacity-50" />
-      </SelectPrimitive.Icon>
+      {onClear ? (
+        <SelectPrimitive.Icon>
+          <span
+            className="flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity"
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); onClear(); }}
+          >
+            <XIcon className="size-4" />
+          </span>
+        </SelectPrimitive.Icon>
+      ) : (
+        <SelectPrimitive.Icon asChild>
+          <ChevronDownIcon className="size-4 opacity-50" />
+        </SelectPrimitive.Icon>
+      )}
     </SelectPrimitive.Trigger>
   )
 }
