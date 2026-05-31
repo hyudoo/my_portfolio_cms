@@ -22,9 +22,7 @@ export default async function LocaleLayout({
     <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
       <NextIntlClientProvider messages={messages}>
         <AuthProvider>
-          <AppLayout>
-            {children}
-          </AppLayout>
+          <AppLayout>{children}</AppLayout>
         </AuthProvider>
       </NextIntlClientProvider>
     </ThemeProvider>

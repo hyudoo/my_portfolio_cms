@@ -51,10 +51,16 @@ ThemeProvider (src/components/theme-provider.tsx)
 ### Routing
 
 App Router with two route groups:
-- `(auth)` — login/register flows (planned, currently empty)
+- `(auth)` — public flows: `/login`, `/register`, `/forgot-password`, `/reset-password`, `/verify-email`
 - `(home)` — authenticated shell; `src/app/[locale]/(home)/dashboard/layout.tsx` wraps pages with `DashboardSidebar`, `DashboardHeader`, and `DashboardMobileSidebar`
 
-All CMS sections (users, subscribers, skills, projects, blogs, docs, messages, analytics, settings) are defined as nav items in `DashboardSidebar` but the routes are not yet implemented.
+Implemented dashboard routes:
+- `/dashboard`, `/profile`, `/settings`
+- `/users`, `/subscribers`
+- `/skill-managements`, `/skill-managements/[categoryId]`
+- `/project-managements/projects`, `/project-managements/categories`
+- `/system/general-setting`, `/system/roles`, `/system/roles/[roleId]`
+- `/messages`, `/analytics` — UI shells exist but are stubs
 
 ### Auth
 
@@ -98,14 +104,88 @@ const [messages, auth] = await concurrent([getMessages, getAuthInfo]);
 
 One slice currently: `src/redux/slices/global.slice.ts` (global loading flag). Add new slices in `src/redux/slices/` and register them in `src/redux/store/index.ts`.
 
+### URL query state
+
+Use `useQuery()` from `@/utils/use-query.util` to sync pagination/search state with the URL:
+
+```ts
+const [query, setQuery] = useQuery({ page: parseNumber(1), keyword: parseString() });
+```
+
+Parser helpers: `parseNumber(default)`, `parseString(default?)`, `parseBoolean()`, `parseNumberArray()`. All page-level list views use this instead of plain `useState`.
+
+### CRUD page pattern
+
+List pages follow a fixed template:
+1. Header — title + "Create" button
+2. Search bar — keyword input + submit
+3. Data table — loading state → rows → empty state (with `colSpan`)
+4. Pagination component at bottom
+
+Row actions: clicking a non-deleted row opens an edit modal; deleted rows show a "Restore" button instead of "Edit/Delete".
+
+### Form-in-modal pattern
+
+Forms inside modals emit changes via an `onChange` prop; the modal's `onOk` reads the accumulated value via a ref:
+
+```ts
+const formDataRef = { current: initialValue };
+modal.show({
+  children: <XForm onChange={(v) => { formDataRef.current = { ...formDataRef.current, ...v }; }} />,
+  onOk: async () => { await xRequest.create(formDataRef.current); },
+});
+```
+
+Form components use `form.watch()` in `useEffect` to call `onChange` on every field change:
+
+```ts
+useEffect(() => {
+  onChange(form.getValues());
+  const { unsubscribe } = form.watch((values) => onChange(values));
+  return unsubscribe;
+}, []);
+```
+
+### Soft delete
+
+Entities have a `deletedAt` field (not physically deleted). Request modules expose `softDelete()` and `restore()` methods. Tables dim deleted rows and swap the Delete button for a Restore button.
+
+### InfiniteSelect
+
+For selectors over large collections (roles, skills), use the `useInfiniteSelect()` hook from `@/hooks/use-infinite-select`:
+
+```ts
+const roleSelect = useInfiniteSelect(async ({ search, skip, take }) => ({
+  items: mappedData, total: count,
+}));
+<InfiniteSelect multiple {...roleSelect} />
+```
+
+### Permission matrix
+
+`RolePermissionsMatrix` renders a resource × action grid (create/read/update/delete). Permission IDs use the format `{resource}::{action}` (e.g., `user::create`). Resources define which actions are available; unavailable cells render `—`.
+
+### Request module conventions
+
+Request objects in `src/requests/*.request.ts` export a plain object with consistent methods:
+`list(params)`, `detail(id)`, `create(body)`, `update(id, body)`, `softDelete(body)`, `restore(body)`.
+
+### Utilities
+
+- `src/utils/datetime.util.ts` — exports `datetime` (dayjs) extended with weekday, localeData, isBetween, isSameOrAfter, isSameOrBefore, minMax
+- `src/utils/form.util.ts` — `isStrongPassword()` validator; `applyMapper()` for transforming select values
+- `src/constants/pagination.constant.ts` — `DEFAULT_PAGE_SIZE = 10`, `PAGE_SIZE_OPTIONS`
+- `src/constants/lucide-icons.ts` — `LUCIDE_ICON_REGISTRY` for dynamic icon rendering via `IconRenderer`
+
 ### Types
 
 - `src/types/entities/` — data models (all extend `BaseEntity` with `id`, `createdAt`, `updatedAt`)
-- `src/types/requests/` — API request/response shapes
+- `src/types/requests/` — API request/response shapes; follow the naming pattern:
+  `ListX`, `ListXResponse`, `ListXQuery`, `DetailXResponse`, `CreateXBody`, `UpdateXBody`, `DeleteXBody`, `RestoreXBody`
 - `src/types/common/` — shared primitives (list query params, reducer states)
 - `src/types/redux/` — Redux state interfaces
 
-Keep entity, request, and Redux types in separate files; do not colocate them.
+Entity types can be extended for list views with relations (e.g., `UserItem = UserEntity & { roles?: RoleEntity[] }`). Keep entity, request, and Redux types in separate files; do not colocate them.
 
 ### i18n (next-intl)
 

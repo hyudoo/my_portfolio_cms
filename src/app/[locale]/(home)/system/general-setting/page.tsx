@@ -1,33 +1,30 @@
 'use client';
 
+import { AboutSettingsTab } from '@/components/settings/about-settings-tab/AboutSettingsTab';
 import { AppearanceSettingsTab } from '@/components/settings/appearance-settings-tab/AppearanceSettingsTab';
 import { GeneralSettingsTab } from '@/components/settings/general-settings-tab/GeneralSettingsTab';
 import { SeoSettingsTab } from '@/components/settings/seo-settings-tab/SeoSettingsTab';
 import { SocialLinksTab } from '@/components/settings/social-links-tab/SocialLinksTab';
 import { notify } from '@/components/layouts/app-layout/notify-provider/NotifyProvider';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Language } from '@/enums/language.enum';
 import { settingRequest } from '@/requests/setting.request';
 import { SettingEntity } from '@/types/entities/setting.entity';
 import { UpdateSettingBody } from '@/types/requests/setting.type';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useState } from 'react';
 
-export default function GeneralSettingPage() {
+export default function SettingsPage() {
   const t = useTranslations();
 
-  const [locale, setLocale] = useState<string>(Language.Vi);
   const [setting, setSetting] = useState<SettingEntity | null>(null);
   const [saving, setSaving] = useState(false);
 
   const fetchSetting = useCallback(async () => {
-    setSetting(null);
     try {
-      const { setting } = await settingRequest.get(locale);
+      const { setting } = await settingRequest.get();
       setSetting(setting);
     } catch {}
-  }, [locale]);
+  }, []);
 
   useEffect(() => {
     fetchSetting();
@@ -37,14 +34,14 @@ export default function GeneralSettingPage() {
     async (body: UpdateSettingBody) => {
       setSaving(true);
       try {
-        const { setting } = await settingRequest.update({ ...body, locale });
+        const { setting } = await settingRequest.update(body);
         setSetting(setting);
         notify.success(t('settings.messages.updated'));
       } finally {
         setSaving(false);
       }
     },
-    [t, locale],
+    [t],
   );
 
   if (!setting) {
@@ -58,28 +55,14 @@ export default function GeneralSettingPage() {
 
   return (
     <div className="space-y-6 p-8">
-      <div className="flex items-start justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">{t('settings.title')}</h1>
-          <p className="text-muted-foreground text-sm mt-1">{t('settings.subtitle')}</p>
-        </div>
-        <Select value={locale} onValueChange={(val) => setLocale(val)}>
-          <SelectTrigger className="w-36">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {Object.values(Language).map((lang) => (
-              <SelectItem key={lang} value={lang}>
-                {t(`common.locale_${lang}`)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">{t('settings.title')}</h1>
+        <p className="text-muted-foreground text-sm mt-1">{t('settings.subtitle')}</p>
       </div>
-
       <Tabs defaultValue="general">
         <TabsList>
           <TabsTrigger value="general">{t('settings.tabs.general')}</TabsTrigger>
+          <TabsTrigger value="about">{t('settings.tabs.about')}</TabsTrigger>
           <TabsTrigger value="social">{t('settings.tabs.social')}</TabsTrigger>
           <TabsTrigger value="seo">{t('settings.tabs.seo')}</TabsTrigger>
           <TabsTrigger value="appearance">{t('settings.tabs.appearance')}</TabsTrigger>
@@ -87,6 +70,10 @@ export default function GeneralSettingPage() {
 
         <TabsContent value="general" className="mt-4">
           <GeneralSettingsTab setting={setting} onSave={handleSave} saving={saving} />
+        </TabsContent>
+
+        <TabsContent value="about" className="mt-4">
+          <AboutSettingsTab setting={setting} onSave={handleSave} saving={saving} />
         </TabsContent>
 
         <TabsContent value="social" className="mt-4">

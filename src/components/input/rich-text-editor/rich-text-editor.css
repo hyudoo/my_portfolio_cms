@@ -1,0 +1,31 @@
+.rich-text-editor .ck-editor__editable {
+  min-height: 260px;
+  border-radius: 0 0 var(--ck-border-radius) var(--ck-border-radius);
+}
+
+/* Dark mode overrides */
+.dark .rich-text-editor {
+  --ck-color-base-background: hsl(var(--card));
+  --ck-color-base-foreground: hsl(var(--card));
+  --ck-color-base-border: hsl(var(--border));
+  --ck-color-toolbar-background: hsl(var(--card));
+  --ck-color-toolbar-border: hsl(var(--border));
+  --ck-color-base-text: hsl(var(--foreground));
+  --ck-color-button-default-background: hsl(var(--card));
+  --ck-color-button-default-hover-background: hsl(var(--accent));
+  --ck-color-button-on-background: hsl(var(--accent));
+  --ck-color-button-on-hover-background: hsl(var(--accent));
+  --ck-color-focus-border: hsl(var(--primary));
+  --ck-color-base-active: hsl(var(--primary));
+  --ck-color-base-active-focus: hsl(var(--primary));
+}
+
+.dark .rich-text-editor .ck-editor__editable {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+.dark .rich-text-editor .ck-editor__editable:focus {
+  border-color: hsl(var(--primary));
+}

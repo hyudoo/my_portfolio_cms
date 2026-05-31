@@ -27,6 +27,9 @@
       "username_placeholder": "nguyenvana",
       "confirm_password": "Xác nhận mật khẩu",
       "confirm_password_placeholder": "Nhập lại mật khẩu",
+      "success_title": "Kiểm tra hộp thư",
+      "success_subtitle": "Chúng tôi đã gửi link xác nhận đến {email}. Nhấn vào link để kích hoạt tài khoản.",
+      "success_back": "Quay lại đăng nhập",
       "success": "Tạo tài khoản thành công! Vui lòng đăng nhập.",
       "error": "Tạo tài khoản thất bại. Vui lòng thử lại."
     },
@@ -55,11 +58,22 @@
       "error": "Đặt lại mật khẩu thất bại. Link có thể đã hết hạn.",
       "invalid_token": "Link đặt lại mật khẩu không hợp lệ hoặc đã hết hạn."
     },
+    "verify_email": {
+      "verifying": "Đang xác minh email của bạn...",
+      "success_title": "Email đã được xác minh!",
+      "success_subtitle": "Tài khoản của bạn đã được kích hoạt. Bạn có thể đăng nhập ngay bây giờ.",
+      "success_back": "Đăng nhập",
+      "error_title": "Xác minh thất bại",
+      "error_subtitle": "Link này không hợp lệ hoặc đã hết hạn.",
+      "invalid_token": "Link xác minh không hợp lệ hoặc đã hết hạn.",
+      "back_to_login": "Quay lại đăng nhập"
+    },
     "validation": {
       "email_required": "Vui lòng nhập email",
       "email_invalid": "Vui lòng nhập email hợp lệ",
       "password_required": "Vui lòng nhập mật khẩu",
       "password_min_length": "Mật khẩu phải có ít nhất 8 ký tự",
+      "password_strength": "Mật khẩu phải chứa chữ hoa, chữ thường, số và ký tự đặc biệt",
       "name_required": "Vui lòng nhập họ và tên",
       "username_required": "Vui lòng nhập tên người dùng",
       "confirm_password_required": "Vui lòng xác nhận mật khẩu",
@@ -81,14 +95,16 @@
       "dashboard": "Bảng điều khiển",
       "users": "Người dùng",
       "subscribers": "Đăng ký",
-      "skills": "Kỹ năng",
-      "projects": "Dự án",
-      "blogs": "Blog",
-      "docs": "Tài liệu kỹ thuật",
+      "skill_managements": "Quản lý kỹ năng",
+      "project_managements": "Quản lý dự án",
       "messages": "Tin nhắn",
       "analytics": "Thống kê",
       "settings": "Cài đặt",
-      "logout": "Đăng xuất"
+      "logout": "Đăng xuất",
+      "projects_list": "Dự án",
+      "project_categories": "Danh mục",
+      "general_setting": "Cài đặt chung",
+      "roles": "Vai trò & Quyền"
     },
     "drawer": {
       "title": "Điều hướng"
@@ -101,7 +117,8 @@
     "sidebar": {
       "section_main": "Chính",
       "section_content": "Nội dung",
-      "section_other": "Khác"
+      "section_other": "Khác",
+      "section_system": "Hệ thống"
     },
     "header": {
       "search_placeholder": "Tìm kiếm...",
@@ -110,6 +127,312 @@
       "new_user": "Người dùng mới",
       "new_project": "Dự án mới",
       "new_blog_post": "Bài viết mới"
+    }
+  },
+  "common": {
+    "yes": "Xác nhận",
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "save_order": "Lưu thứ tự",
+    "saving": "Đang lưu...",
+    "delete": "Xóa",
+    "restore": "Khôi phục",
+    "edit": "Chỉnh sửa",
+    "reorder": "Sắp xếp",
+    "done": "Xong",
+    "locale_filter_all": "Tất cả ngôn ngữ",
+    "locale_vi": "Tiếng Việt",
+    "locale_en": "Tiếng Anh",
+    "coming_soon": "Tính năng sắp ra mắt",
+    "coming_soon_desc": "Chúng tôi đang xây dựng tính năng này, vui lòng quay lại sau."
+  },
+  "users": {
+    "title": "Quản lý người dùng",
+    "subtitle": "Xem và quản lý tài khoản người dùng trong hệ thống",
+    "create_btn": "Thêm người dùng",
+    "search_placeholder": "Tìm theo tên hoặc email...",
+    "total_count": "{count} người dùng",
+    "loading": "Đang tải...",
+    "table": {
+      "username": "Tên người dùng",
+      "email": "Email",
+      "status": "Trạng thái",
+      "roles": "Vai trò",
+      "created_at": "Ngày tạo",
+      "actions": "Thao tác",
+      "empty": "Không có người dùng nào"
+    },
+    "status": {
+      "active": "Hoạt động",
+      "inactive": "Tạm khóa"
+    },
+    "form": {
+      "display_name": "Tên người dùng",
+      "display_name_placeholder": "Nguyễn Văn A",
+      "email": "Email",
+      "email_placeholder": "ban@example.com",
+      "roles": "Vai trò",
+      "roles_placeholder": "Chọn vai trò...",
+      "roles_search": "Tìm vai trò...",
+      "is_active": "Đang hoạt động"
+    },
+    "modal": {
+      "create_title": "Thêm người dùng mới",
+      "edit_title": "Chỉnh sửa người dùng",
+      "delete_title": "Xóa người dùng",
+      "delete_confirm": "Bạn có chắc muốn xóa người dùng \"{username}\"? Hành động này có thể khôi phục lại.",
+      "delete_ok": "Xóa",
+      "restore_title": "Khôi phục người dùng",
+      "restore_confirm": "Bạn có muốn khôi phục người dùng \"{username}\"?",
+      "restore_ok": "Khôi phục"
+    },
+    "validation": {
+      "display_name_required": "Vui lòng nhập tên người dùng",
+      "email_required": "Vui lòng nhập email",
+      "email_invalid": "Vui lòng nhập email hợp lệ"
+    },
+    "messages": {
+      "created": "Tạo người dùng thành công",
+      "updated": "Cập nhật người dùng thành công",
+      "deleted": "Xóa người dùng thành công",
+      "restored": "Khôi phục người dùng thành công"
+    }
+  },
+  "subscribers": {
+    "title": "Quản lý đăng ký",
+    "subtitle": "Xem và quản lý danh sách đăng ký nhận bản tin",
+    "create_btn": "Thêm người đăng ký",
+    "search_placeholder": "Tìm theo email...",
+    "total_count": "{count} người đăng ký",
+    "loading": "Đang tải...",
+    "table": {
+      "email": "Email",
+      "status": "Trạng thái",
+      "confirmed_at": "Xác nhận lúc",
+      "created_at": "Ngày đăng ký",
+      "actions": "Thao tác",
+      "empty": "Không có người đăng ký nào"
+    },
+    "status": {
+      "confirmed": "Đã xác nhận",
+      "pending": "Chờ xác nhận"
+    },
+    "form": {
+      "email": "Email",
+      "email_placeholder": "ban@example.com",
+      "is_confirmed": "Đã xác nhận"
+    },
+    "modal": {
+      "create_title": "Thêm người đăng ký",
+      "edit_title": "Chỉnh sửa người đăng ký",
+      "delete_title": "Xóa người đăng ký",
+      "delete_confirm": "Bạn có chắc muốn xóa người đăng ký \"{email}\"? Hành động này không thể hoàn tác.",
+      "delete_ok": "Xóa"
+    },
+    "validation": {
+      "email_required": "Vui lòng nhập email",
+      "email_invalid": "Vui lòng nhập email hợp lệ"
+    },
+    "messages": {
+      "created": "Thêm người đăng ký thành công",
+      "updated": "Cập nhật thành công",
+      "deleted": "Xóa người đăng ký thành công"
+    }
+  },
+  "skills": {
+    "title": "Quản lý kỹ năng",
+    "subtitle": "Quản lý danh mục kỹ năng và các kỹ năng trong portfolio",
+    "categories_tab": "Danh mục kỹ năng",
+    "skills_tab": "Kỹ năng",
+    "categories": {
+      "create_btn": "Thêm danh mục",
+      "search_placeholder": "Tìm theo tên...",
+      "total_count": "{count} danh mục",
+      "loading": "Đang tải...",
+      "table": {
+        "name": "Tên danh mục",
+        "icon": "Icon",
+        "order": "Thứ tự",
+        "skills_count": "Số kỹ năng",
+        "actions": "Thao tác",
+        "empty": "Không có danh mục nào"
+      },
+      "form": {
+        "name": "Tên danh mục",
+        "name_placeholder": "Backend, Frontend...",
+        "icon": "Icon",
+        "icon_placeholder": "Database, Server hoặc https://...",
+        "order": "Thứ tự",
+        "locale": "Ngôn ngữ",
+        "locale_placeholder": "Chọn ngôn ngữ",
+        "locale_vi": "Tiếng Việt",
+        "locale_en": "Tiếng Anh"
+      },
+      "modal": {
+        "create_title": "Thêm danh mục kỹ năng",
+        "edit_title": "Chỉnh sửa danh mục",
+        "delete_title": "Xóa danh mục",
+        "delete_confirm": "Bạn có chắc muốn xóa danh mục \"{name}\"? Hành động này không thể hoàn tác.",
+        "delete_ok": "Xóa"
+      },
+      "validation": {
+        "name_required": "Vui lòng nhập tên danh mục"
+      },
+      "messages": {
+        "created": "Tạo danh mục thành công",
+        "updated": "Cập nhật danh mục thành công",
+        "deleted": "Xóa danh mục thành công",
+        "reordered": "Cập nhật thứ tự thành công"
+      }
+    },
+    "skills_list": {
+      "create_btn": "Thêm kỹ năng",
+      "search_placeholder": "Tìm theo tên...",
+      "total_count": "{count} kỹ năng",
+      "loading": "Đang tải...",
+      "table": {
+        "name": "Tên kỹ năng",
+        "icon": "Icon",
+        "order": "Thứ tự",
+        "category": "Danh mục",
+        "actions": "Thao tác",
+        "empty": "Không có kỹ năng nào"
+      },
+      "form": {
+        "name": "Tên kỹ năng",
+        "name_placeholder": "React, TypeScript...",
+        "icon": "Icon",
+        "icon_placeholder": "react, typescript hoặc https://...",
+        "order": "Thứ tự",
+        "category": "Danh mục",
+        "category_placeholder": "Chọn danh mục",
+        "locale": "Ngôn ngữ",
+        "locale_placeholder": "Chọn ngôn ngữ",
+        "locale_vi": "Tiếng Việt",
+        "locale_en": "Tiếng Anh"
+      },
+      "modal": {
+        "create_title": "Thêm kỹ năng mới",
+        "edit_title": "Chỉnh sửa kỹ năng",
+        "delete_title": "Xóa kỹ năng",
+        "delete_confirm": "Bạn có chắc muốn xóa kỹ năng \"{name}\"? Hành động này không thể hoàn tác.",
+        "delete_ok": "Xóa"
+      },
+      "validation": {
+        "name_required": "Vui lòng nhập tên kỹ năng",
+        "category_required": "Vui lòng chọn danh mục"
+      },
+      "messages": {
+        "created": "Tạo kỹ năng thành công",
+        "updated": "Cập nhật kỹ năng thành công",
+        "deleted": "Xóa kỹ năng thành công",
+        "reordered": "Cập nhật thứ tự thành công"
+      }
+    },
+    "detail": {
+      "back": "Danh mục kỹ năng",
+      "subtitle": "Quản lý các kỹ năng trong danh mục này"
+    }
+  },
+  "projects": {
+    "title": "Quản lý dự án",
+    "subtitle": "Quản lý danh mục dự án và các dự án trong portfolio",
+    "projects_tab": "Dự án",
+    "categories_tab": "Danh mục",
+    "categories": {
+      "create_btn": "Thêm danh mục",
+      "search_placeholder": "Tìm theo tên...",
+      "total_count": "{count} danh mục",
+      "loading": "Đang tải...",
+      "table": {
+        "name": "Tên danh mục",
+        "slug": "Slug",
+        "order": "Thứ tự",
+        "actions": "Thao tác",
+        "empty": "Không có danh mục nào"
+      },
+      "form": {
+        "name": "Tên danh mục",
+        "name_placeholder": "Web App, Mobile...",
+        "slug": "Slug",
+        "slug_placeholder": "web-app, mobile...",
+        "order": "Thứ tự",
+        "locale": "Ngôn ngữ",
+        "locale_placeholder": "Chọn ngôn ngữ",
+        "locale_vi": "Tiếng Việt",
+        "locale_en": "Tiếng Anh"
+      },
+      "modal": {
+        "create_title": "Thêm danh mục dự án",
+        "edit_title": "Chỉnh sửa danh mục",
+        "delete_title": "Xóa danh mục",
+        "delete_confirm": "Bạn có chắc muốn xóa danh mục \"{name}\"? Hành động này không thể hoàn tác.",
+        "delete_ok": "Xóa"
+      },
+      "validation": {
+        "name_required": "Vui lòng nhập tên danh mục",
+        "slug_required": "Vui lòng nhập slug"
+      },
+      "messages": {
+        "created": "Tạo danh mục thành công",
+        "updated": "Cập nhật danh mục thành công",
+        "deleted": "Xóa danh mục thành công",
+        "reordered": "Cập nhật thứ tự thành công"
+      },
+      "title": "Danh mục dự án",
+      "subtitle": "Quản lý các danh mục phân loại dự án"
+    },
+    "projects_list": {
+      "create_btn": "Thêm dự án",
+      "search_placeholder": "Tìm theo tiêu đề...",
+      "total_count": "{count} dự án",
+      "loading": "Đang tải...",
+      "table": {
+        "title": "Tiêu đề",
+        "categories": "Danh mục",
+        "skills": "Kỹ năng",
+        "featured": "Nổi bật",
+        "featured_yes": "Nổi bật",
+        "order": "Thứ tự",
+        "links": "Liên kết",
+        "live_link": "Xem trực tiếp",
+        "github_link": "GitHub",
+        "actions": "Thao tác",
+        "empty": "Không có dự án nào"
+      },
+      "form": {
+        "title": "Tiêu đề",
+        "title_placeholder": "Tên dự án...",
+        "description": "Mô tả",
+        "description_placeholder": "Mô tả ngắn về dự án...",
+        "live_url": "URL trực tiếp",
+        "github_url": "URL GitHub",
+        "order": "Thứ tự",
+        "featured": "Dự án nổi bật",
+        "locale": "Ngôn ngữ",
+        "locale_placeholder": "Chọn ngôn ngữ",
+        "locale_vi": "Tiếng Việt",
+        "locale_en": "Tiếng Anh",
+        "categories": "Danh mục",
+        "skills": "Kỹ năng sử dụng"
+      },
+      "modal": {
+        "create_title": "Thêm dự án mới",
+        "edit_title": "Chỉnh sửa dự án",
+        "delete_title": "Xóa dự án",
+        "delete_confirm": "Bạn có chắc muốn xóa dự án \"{title}\"? Hành động này không thể hoàn tác.",
+        "delete_ok": "Xóa"
+      },
+      "validation": {
+        "title_required": "Vui lòng nhập tiêu đề dự án",
+        "description_required": "Vui lòng nhập mô tả dự án"
+      },
+      "messages": {
+        "created": "Tạo dự án thành công",
+        "updated": "Cập nhật dự án thành công",
+        "deleted": "Xóa dự án thành công",
+        "reordered": "Cập nhật thứ tự thành công"
+      }
     }
   },
   "dashboard": {
@@ -154,5 +477,209 @@
       "view_all": "Xem tất cả"
     },
     "view_all": "Xem tất cả"
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "subtitle": "Cấu hình giao diện và thông tin portfolio của bạn",
+    "tabs": {
+      "general": "Thông tin chung",
+      "about": "Giới thiệu",
+      "social": "Mạng xã hội",
+      "seo": "SEO & Analytics",
+      "appearance": "Giao diện"
+    },
+    "about": {
+      "content_label": "Nội dung phần Giới thiệu",
+      "content_hint": "Sử dụng trình soạn thảo để tạo nội dung phần About trên portfolio. Hỗ trợ định dạng văn bản phong phú.",
+      "content_placeholder": "Viết nội dung giới thiệu về bản thân..."
+    },
+    "general": {
+      "locale": "Ngôn ngữ",
+      "locale_placeholder": "Chọn ngôn ngữ",
+      "locale_vi": "Tiếng Việt",
+      "locale_en": "Tiếng Anh",
+      "owner_name": "Tên của bạn",
+      "owner_name_placeholder": "Nguyễn Văn A",
+      "hero_title1": "Tiêu đề Hero (phần 1)",
+      "hero_title1_placeholder": "Lập trình viên",
+      "hero_title2": "Tiêu đề Hero (phần 2)",
+      "hero_title2_placeholder": "Full-Stack",
+      "bio": "Giới thiệu bản thân",
+      "bio_placeholder": "Viết đoạn giới thiệu ngắn về bản thân...",
+      "email": "Email liên hệ",
+      "email_placeholder": "ban@example.com",
+      "location": "Địa điểm",
+      "location_placeholder": "Thành phố Hồ Chí Minh, Việt Nam",
+      "profile_image": "Ảnh profile (About)",
+      "profile_image_hint": "Ảnh hiển thị thay cho timeline trong phần Giới thiệu"
+    },
+    "social": {
+      "github": "GitHub",
+      "github_placeholder": "https://github.com/username",
+      "linkedin": "LinkedIn",
+      "linkedin_placeholder": "https://linkedin.com/in/username",
+      "twitter": "Twitter / X",
+      "twitter_placeholder": "https://twitter.com/username",
+      "facebook": "Facebook",
+      "facebook_placeholder": "https://facebook.com/username",
+      "instagram": "Instagram",
+      "instagram_placeholder": "https://instagram.com/username",
+      "youtube": "YouTube",
+      "youtube_placeholder": "https://youtube.com/@channel",
+      "resume_url": "CV / Hồ sơ URL",
+      "resume_url_placeholder": "https://drive.google.com/..."
+    },
+    "seo": {
+      "seo_title": "Tiêu đề Meta",
+      "seo_title_placeholder": "Portfolio của tôi | Trang chủ",
+      "seo_description": "Mô tả Meta",
+      "seo_description_placeholder": "Mô tả ngắn hiển thị trên kết quả tìm kiếm và mạng xã hội...",
+      "seo_keywords": "Từ khóa",
+      "seo_keywords_placeholder": "developer, portfolio, react, nestjs",
+      "ga_id": "Google Analytics ID",
+      "ga_id_placeholder": "G-XXXXXXXXXX"
+    },
+    "appearance": {
+      "sections_title": "Các phần hiển thị",
+      "sections_subtitle": "Chọn các phần nào sẽ hiển thị trên portfolio của bạn",
+      "show_hero": "Trang chủ (Hero)",
+      "show_about": "Giới thiệu",
+      "show_skills": "Kỹ năng",
+      "show_projects": "Dự án",
+      "show_blog": "Blog",
+      "show_contact": "Liên hệ"
+    },
+    "messages": {
+      "updated": "Đã lưu cài đặt thành công"
+    }
+  },
+  "profile": {
+    "title": "Hồ sơ",
+    "subtitle": "Quản lý cài đặt tài khoản của bạn",
+    "tabs": {
+      "info": "Hồ sơ",
+      "security": "Bảo mật"
+    },
+    "info": {
+      "username": "Tên hiển thị",
+      "username_placeholder": "Nguyễn Văn A",
+      "email": "Email",
+      "change_avatar": "Thay avatar"
+    },
+    "security": {
+      "old_password": "Mật khẩu hiện tại",
+      "old_password_placeholder": "Nhập mật khẩu hiện tại",
+      "new_password": "Mật khẩu mới",
+      "new_password_placeholder": "Nhập mật khẩu mới",
+      "confirm_password": "Xác nhận mật khẩu mới",
+      "confirm_password_placeholder": "Nhập lại mật khẩu mới"
+    },
+    "validation": {
+      "username_required": "Vui lòng nhập tên hiển thị",
+      "old_password_required": "Vui lòng nhập mật khẩu hiện tại",
+      "password_min_length": "Mật khẩu phải có ít nhất 8 ký tự",
+      "password_strength": "Mật khẩu phải chứa chữ hoa, chữ thường, số và ký tự đặc biệt",
+      "confirm_password_required": "Vui lòng xác nhận mật khẩu mới",
+      "confirm_password_mismatch": "Mật khẩu không khớp"
+    },
+    "messages": {
+      "info_updated": "Cập nhật hồ sơ thành công",
+      "password_updated": "Đổi mật khẩu thành công",
+      "avatar_uploading": "Đang tải ảnh đại diện...",
+      "avatar_uploaded": "Đã cập nhật ảnh đại diện",
+      "avatar_upload_failed": "Tải ảnh đại diện thất bại"
+    }
+  },
+  "roles": {
+    "title": "Vai trò & Quyền hạn",
+    "subtitle": "Quản lý vai trò và phân quyền truy cập hệ thống",
+    "create_btn": "Thêm vai trò",
+    "search_placeholder": "Tìm theo tên vai trò...",
+    "total_count": "{count} vai trò",
+    "loading": "Đang tải...",
+    "table": {
+      "name": "Tên vai trò",
+      "default": "Mặc định",
+      "default_badge": "Mặc định",
+      "permissions_count": "Số quyền",
+      "created_at": "Ngày tạo",
+      "actions": "Thao tác",
+      "empty": "Không có vai trò nào"
+    },
+    "form": {
+      "name": "Tên vai trò",
+      "name_placeholder": "admin, editor...",
+      "is_default": "Vai trò mặc định"
+    },
+    "modal": {
+      "create_title": "Thêm vai trò mới",
+      "edit_title": "Chỉnh sửa vai trò",
+      "tab_info": "Thông tin",
+      "tab_permissions": "Quyền hạn",
+      "delete_title": "Xóa vai trò",
+      "delete_confirm": "Bạn có chắc muốn xóa vai trò \"{name}\"? Hành động này không thể hoàn tác.",
+      "delete_ok": "Xóa"
+    },
+    "validation": {
+      "name_required": "Vui lòng nhập tên vai trò"
+    },
+    "messages": {
+      "created": "Tạo vai trò thành công",
+      "updated": "Cập nhật vai trò thành công",
+      "deleted": "Xóa vai trò thành công"
+    },
+    "detail": {
+      "back": "Danh sách vai trò",
+      "subtitle": "Quản lý quyền truy cập cho vai trò này"
+    },
+    "permissions": {
+      "resource": "Tài nguyên",
+      "actions": {
+        "create": "Tạo",
+        "read": "Đọc",
+        "update": "Sửa",
+        "delete": "Xóa"
+      },
+      "resources": {
+        "user": "Người dùng",
+        "role": "Vai trò",
+        "contact": "Liên hệ",
+        "skill_category": "Danh mục kỹ năng",
+        "skill": "Kỹ năng",
+        "project_category": "Danh mục dự án",
+        "project": "Dự án",
+        "subscriber": "Đăng ký",
+        "general_setting": "Cài đặt chung",
+        "permission": "Quyền hạn"
+      }
+    }
+  },
+  "api_error": {
+    "999401": "Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại",
+    "999403": "Bạn không có quyền thực hiện thao tác này",
+    "999422": "Dữ liệu không hợp lệ",
+    "999999": "Đã xảy ra lỗi không xác định",
+    "000001": "Email hoặc mật khẩu không đúng",
+    "000002": "Email này đã được đăng ký",
+    "000003": "Không tìm thấy email",
+    "000004": "Vui lòng đăng nhập trước",
+    "000005": "Mã xác nhận không hợp lệ",
+    "000006": "Mật khẩu hiện tại không đúng",
+    "000007": "Tài khoản này đang bị khóa",
+    "000008": "Mã xác nhận đã hết hạn",
+    "001001": "Không tìm thấy vai trò",
+    "001002": "Không thể xóa vai trò mặc định. Hãy gán vai trò khác làm mặc định trước",
+    "003001": "Không tìm thấy danh mục kỹ năng",
+    "003002": "Không tìm thấy kỹ năng",
+    "004001": "Không tìm thấy tệp",
+    "004002": "Cấu hình tệp không khớp",
+    "005001": "Không tìm thấy danh mục dự án",
+    "005002": "Không tìm thấy dự án",
+    "006001": "Không tìm thấy liên hệ",
+    "007001": "Không tìm thấy thông báo",
+    "008001": "Email này đã đăng ký nhận bản tin",
+    "008002": "Không tìm thấy người đăng ký",
+    "008003": "Token đăng ký không hợp lệ hoặc đã hết hạn",
+    "008004": "Đăng ký này đã được xác nhận trước đó"
   }
 }

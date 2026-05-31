@@ -1,11 +1,14 @@
 import { BaseEntity } from './_base.entity';
+import { FileEntity } from './file.entity';
 
 export type SettingEntity = BaseEntity & {
   // General
   locale: string;
   ownerName: string;
-  tagline: string;
+  heroTitle1: string;
+  heroTitle2: string;
   bio: string;
+  aboutContent: string;
   email: string;
   location: string;
   // Social
@@ -29,4 +32,6 @@ export type SettingEntity = BaseEntity & {
   showAbout: boolean;
   showContact: boolean;
   sectionOrder: string;
+  profileImageId: number | null;
+  profileImage: FileEntity | null;
 };

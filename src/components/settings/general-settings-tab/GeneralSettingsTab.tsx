@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { UploadInput } from '@/components/input/upload-input/UploadInput';
+import { FileEntity } from '@/types/entities/file.entity';
 import { SettingEntity } from '@/types/entities/setting.entity';
 import { UpdateSettingBody } from '@/types/requests/setting.type';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,10 +17,12 @@ import { z } from 'zod';
 
 const schema = z.object({
   ownerName: z.string().max(255),
-  tagline: z.string().max(255),
+  heroTitle1: z.string().max(255),
+  heroTitle2: z.string().max(255),
   bio: z.string(),
   email: z.string().max(255),
   location: z.string().max(255),
+  profileImage: z.custom<FileEntity>().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -36,22 +40,30 @@ export function GeneralSettingsTab({ setting, onSave, saving }: Props) {
     resolver: zodResolver(schema),
     defaultValues: {
       ownerName: setting.ownerName,
-      tagline: setting.tagline,
+      heroTitle1: setting.heroTitle1,
+      heroTitle2: setting.heroTitle2,
       bio: setting.bio,
       email: setting.email,
       location: setting.location,
+      profileImage: setting.profileImage ?? undefined,
     },
   });
 
   useEffect(() => {
     form.reset({
       ownerName: setting.ownerName,
-      tagline: setting.tagline,
+      heroTitle1: setting.heroTitle1,
+      heroTitle2: setting.heroTitle2,
       bio: setting.bio,
       email: setting.email,
       location: setting.location,
+      profileImage: setting.profileImage ?? undefined,
     });
   }, [setting, form]);
+
+  const handleSubmit = form.handleSubmit(({ profileImage, ...rest }) => {
+    return onSave({ ...rest, profileImageId: profileImage?.id ?? null });
+  });
 
   return (
     <Card>
@@ -60,7 +72,7 @@ export function GeneralSettingsTab({ setting, onSave, saving }: Props) {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSave)} className="space-y-4 max-w-xl">
+          <form onSubmit={handleSubmit} className="space-y-4 max-w-xl">
             <FormField
               control={form.control}
               name="ownerName"
@@ -77,12 +89,26 @@ export function GeneralSettingsTab({ setting, onSave, saving }: Props) {
 
             <FormField
               control={form.control}
-              name="tagline"
+              name="heroTitle1"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t('settings.general.tagline')}</FormLabel>
+                  <FormLabel>{t('settings.general.hero_title1')}</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder={t('settings.general.tagline_placeholder')} />
+                    <Input {...field} placeholder={t('settings.general.hero_title1_placeholder')} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="heroTitle2"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('settings.general.hero_title2')}</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder={t('settings.general.hero_title2_placeholder')} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -125,6 +151,27 @@ export function GeneralSettingsTab({ setting, onSave, saving }: Props) {
                   <FormLabel>{t('settings.general.location')}</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder={t('settings.general.location_placeholder')} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="profileImage"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('settings.general.profile_image')}</FormLabel>
+                  <p className="text-muted-foreground text-xs">{t('settings.general.profile_image_hint')}</p>
+                  <FormControl>
+                    <UploadInput
+                      mode="single"
+                      accept="image/*"
+                      isPublic
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
