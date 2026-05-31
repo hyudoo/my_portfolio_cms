@@ -15,7 +15,9 @@ export type ListProjectsResponse = {
   total: number;
 };
 
-export type ListProjectsQuery = ListQuery;
+export type ListProjectsQuery = ListQuery & {
+  locale?: string | null;
+};
 
 export type ProjectDetail = ProjectItem;
 
@@ -23,9 +25,12 @@ export type DetailProjectResponse = {
   project: ProjectDetail;
 };
 
-export type CreateProjectBody = Omit<ProjectEntity, 'id' | 'createdAt' | 'updatedAt'>;
+export type CreateProjectBody = Omit<ProjectEntity, 'id' | 'createdAt' | 'updatedAt'> & {
+  skillIds?: number[];
+  categoryIds?: number[];
+};
 
-export type UpdateProjectBody = Partial<ProjectEntity>;
+export type UpdateProjectBody = Partial<CreateProjectBody>;
 
 export type DeleteProjectsBody = {
   ids: number[];

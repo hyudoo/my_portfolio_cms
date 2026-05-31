@@ -1,3 +1,4 @@
+import { ItemDto } from "../common/item-dto.type";
 import { ListQuery } from "../common/list-query.type";
 import { FileEntity } from "../entities/file.entity";
 import { RoleEntity } from "../entities/role.entity";
@@ -21,9 +22,11 @@ export type DetailUserResponse = {
   user: UserDetail;
 };
 
-export type CreateUserBody = Omit<UserEntity, "id" | "updatedAt" | "createdAt">;
+export type CreateUserBody = Omit<UserEntity, "id" | "updatedAt" | "createdAt"> & {
+  roles?: ItemDto[];
+};
 
-export type UpdateUserBody = Partial<UserEntity>;
+export type UpdateUserBody = Partial<UserEntity & { roles: ItemDto[] }>;
 
 export type DeleteUsersBody = {
   ids: number[];

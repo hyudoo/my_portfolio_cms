@@ -8,7 +8,9 @@ export type ListProjectCategoriesResponse = {
   total: number;
 };
 
-export type ListProjectCategoriesQuery = ListQuery;
+export type ListProjectCategoriesQuery = ListQuery & {
+  locale?: string | null;
+};
 
 export type ProjectCategoryDetail = ProjectCategoryItem;
 

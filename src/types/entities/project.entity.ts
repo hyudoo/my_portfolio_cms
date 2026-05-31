@@ -6,5 +6,6 @@ export type ProjectEntity = BaseEntity & {
   liveUrl: string | null;
   githubUrl: string | null;
   featured: boolean;
-  order: number;
+  order: string;
+  locale: string;
 };

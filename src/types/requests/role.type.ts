@@ -19,9 +19,17 @@ export type DetailRoleResponse = {
   role: RoleDetail;
 };
 
-export type CreateRoleBody = Omit<RoleEntity, 'id' | 'createdAt' | 'updatedAt'>;
+export type CreateRoleBody = {
+  name: string;
+  isDefault?: boolean;
+  permissions?: { id: number }[];
+};
 
-export type UpdateRoleBody = Partial<RoleEntity>;
+export type UpdateRoleBody = {
+  name?: string;
+  isDefault?: boolean;
+  permissions?: { id: number }[];
+};
 
 export type DeleteRolesBody = {
   ids: number[];

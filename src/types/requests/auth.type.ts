@@ -1,4 +1,4 @@
-import { UserEntity } from "../entities/user.entity";
+import { UserEntity } from '../entities/user.entity';
 
 export type AuthUser = UserEntity;
 
@@ -15,8 +15,7 @@ export type RegisterBody = {
 };
 
 export type VerifyEmailBody = {
-  email: string;
-  code: string;
+  token: string;
 };
 
 export type ResendVerifyEmailBody = {
@@ -27,11 +26,18 @@ export type LoginResponse = {
   accessToken: string;
 };
 
-export type UpdateInfoBody = Omit<RegisterBody, "email" | "password">;
+export type UpdateInfoBody = Omit<RegisterBody, 'email' | 'password'> & {
+  avatarId?: number;
+};
 
 export type UpdatePasswordBody = {
-  oldPassword: string;
   password: string;
+  newPassword: string;
+};
+
+export type ForgotPasswordBody = {
+  email: string;
+  locale: string;
 };
 
 export type ResetPasswordBody = {

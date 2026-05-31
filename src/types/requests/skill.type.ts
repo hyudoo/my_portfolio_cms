@@ -11,7 +11,10 @@ export type ListSkillsResponse = {
   total: number;
 };
 
-export type ListSkillsQuery = ListQuery;
+export type ListSkillsQuery = ListQuery & {
+  categoryId?: number | null;
+  locale?: string | null;
+};
 
 export type SkillDetail = SkillItem;
 
