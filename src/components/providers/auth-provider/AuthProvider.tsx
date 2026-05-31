@@ -3,6 +3,7 @@
 import React, { ReactNode, useContext, useEffect, useState } from 'react';
 import { SessionProvider, useSession } from 'next-auth/react';
 import { AuthUser } from '../../../types/requests/auth.type';
+import { setAccessToken } from '../../../utils/api.util';
 
 type AuthContextValue = [AuthUser | undefined, React.Dispatch<React.SetStateAction<AuthUser | undefined>>];
 
@@ -14,13 +15,17 @@ export const useAuthAccount = () => useContext(AuthContext)[0];
 
 export const useAuthUser = () => useContext(AuthContext)[0];
 
+export const useAuthReady = () => useSession().status !== 'loading';
+
 function AuthContextProvider({ children }: { children: ReactNode }) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [auth, setAuth] = useState<AuthUser | undefined>(session?.user);
 
   useEffect(() => {
+    if (status === 'loading') return;
     setAuth(session?.user);
-  }, [session?.user]);
+    setAccessToken(session?.accessToken ?? null);
+  }, [status, session?.user, session?.accessToken]);
 
   return <AuthContext.Provider value={[auth, setAuth]}>{children}</AuthContext.Provider>;
 }

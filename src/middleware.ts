@@ -5,7 +5,7 @@ import { routing } from './i18n/routing';
 
 const intlMiddleware = createMiddleware(routing);
 
-const AUTH_PATHS = ['/login', '/register', '/forgot-password', '/reset-password'];
+const AUTH_PATHS = ['/login', '/register', '/forgot-password', '/reset-password', '/verify-email'];
 
 function stripLocale(pathname: string) {
   return pathname.replace(/^\/[a-z]{2}(-[A-Z]{2})?/, '') || '/';

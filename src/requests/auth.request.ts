@@ -1,5 +1,6 @@
 import { signIn, signOut } from 'next-auth/react';
 import {
+  ForgotPasswordBody,
   LoginBody,
   RegisterBody,
   ResendVerifyEmailBody,
@@ -12,7 +13,7 @@ import { api } from '../utils/api.util';
 
 export const authRequest = {
   login: async (body: LoginBody) => {
-    return signIn('credentials', { ...body, redirect: false });
+    return signIn('credentials', { email: body.email, password: body.password, redirect: false });
   },
 
   register: async (body: RegisterBody) => {
@@ -40,8 +41,13 @@ export const authRequest = {
     return data;
   },
 
+  forgotPassword: async (body: ForgotPasswordBody) => {
+    const { data } = await api.post('/auth/forgot-password', body, { silent: true });
+    return data;
+  },
+
   resetPassword: async (body: ResetPasswordBody) => {
-    const { data } = await api.post('/auth/reset-password', body);
+    const { data } = await api.put('/auth/reset-password', body);
     return data;
   },
 

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -8,13 +8,12 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import { Link, useRouter } from '@/i18n/navigation';
-import { toast } from 'sonner';
+import { notify } from '@/components/layouts/app-layout/notify-provider/NotifyProvider';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { InputPassword } from '@/components/input/input-password/InputPassword';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { authRequest } from '@/requests/auth.request';
@@ -22,11 +21,10 @@ import { authRequest } from '@/requests/auth.request';
 type LoginFormValues = {
   email: string;
   password: string;
-  remember: boolean;
 };
 
 export function LoginForm() {
-  const t = useTranslations('auth');
+  const t = useTranslations();
   const router = useRouter();
   const [socialLoading, setSocialLoading] = useState<'github' | 'google' | null>(null);
 
@@ -35,25 +33,23 @@ export function LoginForm() {
       z.object({
         email: z
           .string()
-          .min(1, t('validation.email_required'))
-          .refine((val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val), t('validation.email_invalid')),
-        password: z.string().min(1, t('validation.password_required')),
-        remember: z.boolean(),
+          .min(1, t('auth.validation.email_required'))
+          .refine((val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val), t('auth.validation.email_invalid')),
+        password: z.string().min(1, t('auth.validation.password_required')),
       }),
     [t],
   );
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: '', password: '', remember: false },
+    defaultValues: { email: '', password: '' },
   });
 
   const onSubmit = async (values: LoginFormValues) => {
     const res = await authRequest.login({ email: values.email, password: values.password });
-    console.log('res: ', res);
 
-    if (!res?.ok) {
-      toast.error(t('login.error'));
+    if (res?.error) {
+      notify.error(t('auth.login.error'));
     } else {
       router.replace('/dashboard');
     }
@@ -74,11 +70,11 @@ export function LoginForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium">{t('email')}</FormLabel>
+                <FormLabel className="text-sm font-medium">{t('auth.email')}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                    <Input type="email" placeholder={t('email_placeholder')} className="h-11 pl-9" {...field} />
+                    <Input type="email" placeholder={t('auth.email_placeholder')} className="h-11 pl-9" {...field} />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -91,35 +87,21 @@ export function LoginForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium">{t('password')}</FormLabel>
+                <FormLabel className="text-sm font-medium">{t('auth.password')}</FormLabel>
                 <FormControl>
-                  <InputPassword placeholder={t('password_placeholder')} className="h-11" {...field} />
+                  <InputPassword placeholder={t('auth.password_placeholder')} className="h-11" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <div className="flex justify-between items-center">
-            <FormField
-              control={form.control}
-              name="remember"
-              render={({ field }) => (
-                <FormItem className="flex items-center gap-2 space-y-0">
-                  <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                  </FormControl>
-                  <FormLabel className="text-sm text-muted-foreground cursor-pointer font-normal">
-                    {t('login.remember_me')}
-                  </FormLabel>
-                </FormItem>
-              )}
-            />
+          <div className="flex justify-end">
             <Link
               href="/forgot-password"
               className="text-sm font-medium text-sky-500 hover:text-sky-400 transition-colors"
             >
-              {t('login.forgot_password')}
+              {t('auth.login.forgot_password')}
             </Link>
           </div>
 
@@ -127,22 +109,22 @@ export function LoginForm() {
             {form.formState.isSubmitting && (
               <span className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
             )}
-            {t('login.submit')}
+            {t('auth.login.submit')}
           </Button>
         </form>
       </Form>
 
       <p className="text-center text-sm text-muted-foreground mt-6">
-        {t('login.no_account')}{' '}
+        {t('auth.login.no_account')}{' '}
         <Link href="/register" className="font-semibold text-sky-500 hover:text-sky-400 transition-colors">
-          {t('login.link_register')}
+          {t('auth.login.link_register')}
         </Link>
       </p>
 
       <div className="relative my-6">
         <Separator />
         <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-2 text-xs text-muted-foreground">
-          {t('or_continue_with')}
+          {t('auth.or_continue_with')}
         </span>
       </div>
       <div className="grid grid-cols-2 gap-3">

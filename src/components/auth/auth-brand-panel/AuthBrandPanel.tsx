@@ -1,13 +1,13 @@
-'use client';
+﻿'use client';
 
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 
 export function AuthBrandPanel() {
-  const t = useTranslations('auth.brand');
+  const t = useTranslations();
 
-  const features = [t('feature_1'), t('feature_2'), t('feature_3')];
+  const features = [t('auth.brand.feature_1'), t('auth.brand.feature_2'), t('auth.brand.feature_3')];
 
   return (
     <div className="hidden lg:flex lg:w-[52%] relative overflow-hidden bg-linear-to-br from-sky-500 via-sky-600 to-sky-800">
@@ -38,8 +38,8 @@ export function AuthBrandPanel() {
             P
           </div>
           <div>
-            <div className="font-bold text-lg leading-tight">{t('app_name')}</div>
-            <div className="text-sky-200 text-xs">{t('cms_admin')}</div>
+            <div className="font-bold text-lg leading-tight">{t('auth.brand.app_name')}</div>
+            <div className="text-sky-200 text-xs">{t('auth.brand.cms_admin')}</div>
           </div>
         </motion.div>
 
@@ -49,8 +49,8 @@ export function AuthBrandPanel() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <h1 className="text-4xl font-bold leading-snug mb-5">{t('tagline')}</h1>
-          <p className="text-sky-100 text-base leading-relaxed max-w-sm">{t('description')}</p>
+          <h1 className="text-4xl font-bold leading-snug mb-5">{t('auth.brand.tagline')}</h1>
+          <p className="text-sky-100 text-base leading-relaxed max-w-sm">{t('auth.brand.description')}</p>
 
           <ul className="mt-10 space-y-4">
             {features.map((feature, i) => (
@@ -75,9 +75,10 @@ export function AuthBrandPanel() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="border-t border-white/20 pt-8"
         >
-          <p className="text-sky-200 text-sm italic">&ldquo;{t('footer_quote')}&rdquo;</p>
+          <p className="text-sky-200 text-sm italic">&ldquo;{t('auth.brand.footer_quote')}&rdquo;</p>
         </motion.div>
       </div>
     </div>
   );
 }
+

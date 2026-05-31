@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { authRequest } from '@/requests/auth.request';
-import { notify } from '../../providers/notify-provider/NotifyProvider';
+import { notify } from '../../layouts/app-layout/notify-provider/NotifyProvider';
 
 type ResetPasswordFormValues = {
   password: string;
@@ -25,7 +25,7 @@ type Props = {
 };
 
 export function ResetPasswordForm({ token }: Props) {
-  const t = useTranslations('auth');
+  const t = useTranslations();
   const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -34,11 +34,11 @@ export function ResetPasswordForm({ token }: Props) {
     () =>
       z
         .object({
-          password: z.string().min(8, t('validation.password_min_length')),
-          confirmPassword: z.string().min(1, t('validation.confirm_password_required')),
+          password: z.string().min(8, t('auth.validation.password_min_length')),
+          confirmPassword: z.string().min(1, t('auth.validation.confirm_password_required')),
         })
         .refine((data) => data.password === data.confirmPassword, {
-          message: t('validation.confirm_password_mismatch'),
+          message: t('auth.validation.confirm_password_mismatch'),
           path: ['confirmPassword'],
         }),
     [t],
@@ -54,7 +54,7 @@ export function ResetPasswordForm({ token }: Props) {
       await authRequest.resetPassword({ token, password: values.password });
       setSuccess(true);
     } catch {
-      notify.error(t('reset_password.error'));
+      notify.error(t('auth.reset_password.error'));
     }
   };
 
@@ -72,15 +72,17 @@ export function ResetPasswordForm({ token }: Props) {
             <ShieldCheck className="w-8 h-8 text-sky-500" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('reset_password.success_title')}</h3>
-            <p className="text-sm text-muted-foreground mt-1">{t('reset_password.success_subtitle')}</p>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              {t('auth.reset_password.success_title')}
+            </h3>
+            <p className="text-sm text-muted-foreground mt-1">{t('auth.reset_password.success_subtitle')}</p>
           </div>
           <Link
             href="/login"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-sky-500 hover:text-sky-400 transition-colors mt-2"
           >
             <ArrowLeft className="w-4 h-4" />
-            {t('reset_password.success_back')}
+            {t('auth.reset_password.success_back')}
           </Link>
         </motion.div>
       ) : (
@@ -97,13 +99,13 @@ export function ResetPasswordForm({ token }: Props) {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium">{t('reset_password.new_password')}</FormLabel>
+                    <FormLabel className="text-sm font-medium">{t('auth.reset_password.new_password')}</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                         <Input
                           type={showPassword ? 'text' : 'password'}
-                          placeholder={t('reset_password.new_password_placeholder')}
+                          placeholder={t('auth.reset_password.new_password_placeholder')}
                           className="h-11 pl-9 pr-10"
                           {...field}
                         />
@@ -127,13 +129,13 @@ export function ResetPasswordForm({ token }: Props) {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium">{t('reset_password.confirm_password')}</FormLabel>
+                    <FormLabel className="text-sm font-medium">{t('auth.reset_password.confirm_password')}</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                         <Input
                           type={showConfirm ? 'text' : 'password'}
-                          placeholder={t('reset_password.confirm_password_placeholder')}
+                          placeholder={t('auth.reset_password.confirm_password_placeholder')}
                           className="h-11 pl-9 pr-10"
                           {...field}
                         />
@@ -156,7 +158,7 @@ export function ResetPasswordForm({ token }: Props) {
                 {form.formState.isSubmitting && (
                   <span className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
                 )}
-                {t('reset_password.submit')}
+                {t('auth.reset_password.submit')}
               </Button>
             </form>
           </Form>
@@ -166,7 +168,7 @@ export function ResetPasswordForm({ token }: Props) {
             className="mt-6 flex items-center justify-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            {t('reset_password.back_to_login')}
+            {t('auth.reset_password.back_to_login')}
           </Link>
         </motion.div>
       )}

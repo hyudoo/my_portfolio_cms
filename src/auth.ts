@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth';
+import NextAuth, { CredentialsSignin } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import GitHub from 'next-auth/providers/github';
 import Google from 'next-auth/providers/google';
@@ -26,7 +26,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           }),
         });
 
-        if (!loginRes.ok) return null;
+        if (!loginRes.ok) throw new CredentialsSignin();
 
         const { accessToken } = await loginRes.json();
 
@@ -34,7 +34,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           headers: { Authorization: `Bearer ${accessToken}` },
         });
 
-        if (!meRes.ok) return null;
+        if (!meRes.ok) throw new CredentialsSignin();
 
         const user: AuthUser = await meRes.json();
 
@@ -67,5 +67,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
   session: {
     strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60,    // 30 days, khớp với JWT_EXPIRATION
+    updateAge: 30 * 24 * 60 * 60, // không gia hạn session cookie trong cửa sổ 30 ngày
   },
 });
