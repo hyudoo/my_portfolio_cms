@@ -52,7 +52,7 @@ export const AppModal: React.FC<AppModalProps> = ({
         <Dialog.Content
           className={clsx(
             'fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 rounded-xl shadow-xl overflow-hidden',
-            'bg-white dark:bg-gray-900',
+            'bg-card text-card-foreground',
             className,
           )}
           style={{ width, maxWidth: 'calc(100vw - 32px)' }}
@@ -63,13 +63,13 @@ export const AppModal: React.FC<AppModalProps> = ({
           <div
             className={clsx(
               'flex items-center justify-between px-12 py-5',
-              icon ? 'bg-white dark:bg-gray-900' : 'bg-sky-600',
+              icon ? 'bg-card' : 'bg-sky-600',
             )}
           >
             <Dialog.Title
               className={clsx(
                 'font-semibold text-base flex items-center gap-2',
-                icon ? 'text-neutral-900 dark:text-white' : 'text-white',
+                icon ? 'text-card-foreground' : 'text-white',
               )}
             >
               {icon && <span className="icon">{icon}</span>}
@@ -80,7 +80,7 @@ export const AppModal: React.FC<AppModalProps> = ({
               className={clsx(
                 'p-1 rounded transition-colors',
                 icon
-                  ? 'text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white'
+                  ? 'text-muted-foreground hover:text-foreground'
                   : 'text-white/80 hover:text-white',
               )}
             >
@@ -99,7 +99,7 @@ export const AppModal: React.FC<AppModalProps> = ({
                   {!cancelButtonProps?.hidden && (
                     <button
                       onClick={onClose ?? onCancel}
-                      className="flex-1 h-13.5 px-4 rounded-lg border border-neutral-300 dark:border-neutral-600 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+                      className="flex-1 h-13.5 px-4 rounded-lg border border-border text-sm font-medium text-foreground hover:bg-muted transition-colors"
                     >
                       {cancelText}
                     </button>

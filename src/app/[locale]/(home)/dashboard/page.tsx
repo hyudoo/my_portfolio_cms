@@ -58,51 +58,51 @@ const recentSubscribers = [
 ];
 
 export default function DashboardPage() {
-  const t = useTranslations('dashboard');
+  const t = useTranslations();
 
   const stats = [
     {
-      title: t('metrics.total_users'),
+      title: t('dashboard.metrics.total_users'),
       value: '2,847',
-      change: t('metrics.total_users_growth'),
+      change: t('dashboard.metrics.total_users_growth'),
       icon: Users,
       color: 'bg-blue-500/10 text-blue-500',
     },
     {
-      title: t('metrics.total_subscribers'),
+      title: t('dashboard.metrics.total_subscribers'),
       value: '1,234',
-      change: t('metrics.total_subscribers_growth'),
+      change: t('dashboard.metrics.total_subscribers_growth'),
       icon: Mail,
       color: 'bg-purple-500/10 text-purple-500',
     },
     {
-      title: t('metrics.total_projects'),
+      title: t('dashboard.metrics.total_projects'),
       value: '24',
-      change: t('metrics.total_projects_growth'),
+      change: t('dashboard.metrics.total_projects_growth'),
       icon: FolderOpen,
       color: 'bg-emerald-500/10 text-emerald-500',
     },
     {
-      title: t('metrics.blog_views'),
+      title: t('dashboard.metrics.blog_views'),
       value: '156K',
-      change: t('metrics.blog_views_growth'),
+      change: t('dashboard.metrics.blog_views_growth'),
       icon: FileText,
       color: 'bg-orange-500/10 text-orange-500',
     },
   ];
 
   const systemStatus = [
-    { label: t('system_status.api_server'), value: 95 },
-    { label: t('system_status.database'), value: 98 },
-    { label: t('system_status.storage'), value: 72 },
-    { label: t('system_status.cache'), value: 99 },
+    { label: t('dashboard.system_status.api_server'), value: 95 },
+    { label: t('dashboard.system_status.database'), value: 98 },
+    { label: t('dashboard.system_status.storage'), value: 72 },
+    { label: t('dashboard.system_status.cache'), value: 99 },
   ];
 
   return (
     <div className="space-y-8 p-8">
       <div className="space-y-2">
-        <h1 className="text-4xl font-bold tracking-tight">{t('title')}</h1>
-        <p className="text-muted-foreground">{t('subtitle')}</p>
+        <h1 className="text-4xl font-bold tracking-tight">{t('dashboard.title')}</h1>
+        <p className="text-muted-foreground">{t('dashboard.subtitle')}</p>
       </div>
 
       {/* Stats Grid */}
@@ -135,7 +135,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="glass border-glass-border lg:col-span-2">
           <div className="p-6">
-            <h2 className="text-xl font-semibold mb-6">{t('charts.monthly_growth')}</h2>
+            <h2 className="text-xl font-semibold mb-6">{t('dashboard.charts.monthly_growth')}</h2>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="oklch(0.22 0.01 270)" />
@@ -158,7 +158,7 @@ export default function DashboardPage() {
 
         <Card className="glass border-glass-border">
           <div className="p-6">
-            <h2 className="text-xl font-semibold mb-6">{t('charts.traffic_overview')}</h2>
+            <h2 className="text-xl font-semibold mb-6">{t('dashboard.charts.traffic_overview')}</h2>
             <ResponsiveContainer width="100%" height={220}>
               <PieChart>
                 <Pie
@@ -203,9 +203,9 @@ export default function DashboardPage() {
         <Card className="glass border-glass-border lg:col-span-2">
           <div className="p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold">{t('recent_activities')}</h2>
+              <h2 className="text-xl font-semibold">{t('dashboard.recent_activities')}</h2>
               <Button variant="outline" size="sm">
-                {t('view_all')}
+                {t('dashboard.view_all')}
               </Button>
             </div>
             <ScrollArea className="h-80">
@@ -229,23 +229,23 @@ export default function DashboardPage() {
 
         <Card className="glass border-glass-border">
           <div className="p-6">
-            <h2 className="text-xl font-semibold mb-6">{t('system_status.title')}</h2>
+            <h2 className="text-xl font-semibold mb-6">{t('dashboard.system_status.title')}</h2>
             <div className="space-y-6">
               {systemStatus.map(({ label, value }) => (
                 <div key={label}>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium">{label}</span>
                     <Badge variant="default" className="bg-emerald-500/20 text-emerald-500 border-emerald-500/30">
-                      {t('system_status.operational')}
+                      {t('dashboard.system_status.operational')}
                     </Badge>
                   </div>
                   <Progress value={value} className="h-1" />
                 </div>
               ))}
               <div className="pt-4 border-t border-border">
-                <p className="text-xs text-muted-foreground mb-3">{t('system_status.last_updated')}</p>
+                <p className="text-xs text-muted-foreground mb-3">{t('dashboard.system_status.last_updated')}</p>
                 <Button variant="outline" size="sm" className="w-full">
-                  {t('system_status.view_details')}
+                  {t('dashboard.system_status.view_details')}
                 </Button>
               </div>
             </div>
@@ -258,9 +258,9 @@ export default function DashboardPage() {
         <Card className="glass border-glass-border">
           <div className="p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold">{t('latest_blog_posts.title')}</h2>
+              <h2 className="text-xl font-semibold">{t('dashboard.latest_blog_posts.title')}</h2>
               <Button variant="outline" size="sm">
-                {t('latest_blog_posts.view_all')}
+                {t('dashboard.latest_blog_posts.view_all')}
               </Button>
             </div>
             <div className="space-y-4">
@@ -270,7 +270,7 @@ export default function DashboardPage() {
                     <p className="text-sm font-medium line-clamp-1">{blog.title}</p>
                     <div className="flex gap-4 mt-2">
                       <span className="text-xs text-muted-foreground">
-                        {blog.views} {t('latest_blog_posts.col_views').toLowerCase()}
+                        {blog.views} {t('dashboard.latest_blog_posts.col_views').toLowerCase()}
                       </span>
                       <span className="text-xs text-muted-foreground">{blog.likes} likes</span>
                       <span className="text-xs text-muted-foreground">{blog.date}</span>
@@ -285,9 +285,9 @@ export default function DashboardPage() {
         <Card className="glass border-glass-border">
           <div className="p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold">{t('recent_subscribers.title')}</h2>
+              <h2 className="text-xl font-semibold">{t('dashboard.recent_subscribers.title')}</h2>
               <Button variant="outline" size="sm">
-                {t('recent_subscribers.view_all')}
+                {t('dashboard.recent_subscribers.view_all')}
               </Button>
             </div>
             <div className="space-y-4">

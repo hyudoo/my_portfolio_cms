@@ -11,51 +11,94 @@ import {
   Mail,
   Code2,
   FolderOpen,
-  FileText,
-  BookOpen,
   MessageSquare,
   BarChart3,
   Settings,
   LogOut,
   Zap,
+  List,
+  Tag,
+  ShieldCheck,
+  ChevronDown,
+  ChevronRight,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { logoutAction } from '@/actions/auth.action';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import type { LucideIcon } from 'lucide-react';
 
-const MENU_SECTIONS = [
+type NavChild = {
+  labelKey: string;
+  href: string;
+  icon: LucideIcon;
+};
+
+type NavItem = {
+  labelKey: string;
+  href: string;
+  icon: LucideIcon;
+  children?: NavChild[];
+};
+
+type MenuSection = {
+  titleKey: string;
+  items: NavItem[];
+};
+
+const MENU_SECTIONS: MenuSection[] = [
   {
-    titleKey: 'sidebar.section_main',
+    titleKey: 'layout.sidebar.section_main',
     items: [
-      { labelKey: 'nav.dashboard', href: '/dashboard', icon: LayoutDashboard },
-      { labelKey: 'nav.users', href: '/dashboard/users', icon: Users },
-      { labelKey: 'nav.subscribers', href: '/dashboard/subscribers', icon: Mail },
+      { labelKey: 'layout.nav.dashboard', href: '/dashboard', icon: LayoutDashboard },
+      { labelKey: 'layout.nav.users', href: '/users', icon: Users },
+      { labelKey: 'layout.nav.subscribers', href: '/subscribers', icon: Mail },
     ],
   },
   {
-    titleKey: 'sidebar.section_content',
+    titleKey: 'layout.sidebar.section_content',
     items: [
-      { labelKey: 'nav.skills', href: '/dashboard/skills', icon: Code2 },
-      { labelKey: 'nav.projects', href: '/dashboard/projects', icon: FolderOpen },
-      { labelKey: 'nav.blogs', href: '/dashboard/blogs', icon: FileText },
-      { labelKey: 'nav.docs', href: '/dashboard/docs', icon: BookOpen },
+      { labelKey: 'layout.nav.skill_managements', href: '/skill-managements', icon: Code2 },
+      {
+        labelKey: 'layout.nav.project_managements',
+        href: '/project-managements',
+        icon: FolderOpen,
+        children: [
+          { labelKey: 'layout.nav.projects_list', href: '/project-managements/projects', icon: List },
+          { labelKey: 'layout.nav.project_categories', href: '/project-managements/categories', icon: Tag },
+        ],
+      },
     ],
   },
   {
-    titleKey: 'sidebar.section_other',
+    titleKey: 'layout.sidebar.section_other',
     items: [
-      { labelKey: 'nav.messages', href: '/dashboard/messages', icon: MessageSquare },
-      { labelKey: 'nav.analytics', href: '/dashboard/analytics', icon: BarChart3 },
+      { labelKey: 'layout.nav.messages', href: '/messages', icon: MessageSquare },
+      { labelKey: 'layout.nav.analytics', href: '/analytics', icon: BarChart3 },
     ],
   },
   {
-    titleKey: 'nav.settings',
-    items: [{ labelKey: 'nav.settings', href: '/dashboard/settings', icon: Settings }],
+    titleKey: 'layout.sidebar.section_system',
+    items: [
+      { labelKey: 'layout.nav.general_setting', href: '/system/general-setting', icon: Settings },
+      { labelKey: 'layout.nav.roles', href: '/system/roles', icon: ShieldCheck },
+    ],
   },
-] as const;
+];
 
 export function DashboardSidebar() {
-  const t = useTranslations('layout');
+  const t = useTranslations();
   const pathname = usePathname();
+
+  const defaultExpanded = MENU_SECTIONS.flatMap((s) => s.items)
+    .filter((item) => item.children?.some((child) => pathname === child.href || pathname.startsWith(child.href + '/')))
+    .map((item) => item.href);
+
+  const [expanded, setExpanded] = useState<string[]>(defaultExpanded);
+
+  const toggleExpanded = (href: string) => {
+    setExpanded((prev) => (prev.includes(href) ? prev.filter((h) => h !== href) : [...prev, href]));
+  };
 
   return (
     <div className="flex flex-col h-screen bg-sidebar">
@@ -81,8 +124,67 @@ export function DashboardSidebar() {
               <div className="space-y-1">
                 {section.items.map((item) => {
                   const Icon = item.icon;
-                  const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+                  const isGroupActive = pathname === item.href || pathname.startsWith(item.href + '/');
 
+                  if (item.children) {
+                    const isOpen = expanded.includes(item.href);
+                    return (
+                      <div key={item.href}>
+                        <Button
+                          variant="ghost"
+                          onClick={() => toggleExpanded(item.href)}
+                          className={cn(
+                            'w-full flex items-center justify-between gap-3 h-10 rounded-lg px-3',
+                            'text-sm',
+                            isGroupActive && 'bg-primary/20 text-primary hover:bg-primary/30 hover:text-primary',
+                          )}
+                        >
+                          <div className="flex items-center gap-3">
+                            <Icon className="w-4 h-4" />
+                            <span>{t(item.labelKey)}</span>
+                          </div>
+                          <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
+                            <ChevronRight className="w-4 h-4" />
+                          </motion.div>
+                        </Button>
+                        <AnimatePresence initial={false}>
+                          {isOpen && (
+                            <motion.div
+                              key="submenu"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.2, ease: 'easeInOut' }}
+                              style={{ overflow: 'hidden' }}
+                            >
+                              <div className="ml-3 pl-4 border-l border-border space-y-1 mt-1 pb-1">
+                                {item.children.map((child) => {
+                                  const ChildIcon = child.icon;
+                                  const isActive = pathname === child.href;
+                                  return (
+                                    <Link key={child.href} href={child.href}>
+                                      <Button
+                                        variant={isActive ? 'default' : 'ghost'}
+                                        className={cn(
+                                          'w-full justify-start gap-3 h-9 rounded-lg',
+                                          isActive && 'bg-primary/20 text-primary hover:bg-primary/30',
+                                        )}
+                                      >
+                                        <ChildIcon className="w-3.5 h-3.5" />
+                                        <span className="text-sm">{t(child.labelKey)}</span>
+                                      </Button>
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  }
+
+                  const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
                   return (
                     <Link key={item.href} href={item.href}>
                       <Button
@@ -111,7 +213,7 @@ export function DashboardSidebar() {
           onClick={() => logoutAction()}
         >
           <LogOut className="w-4 h-4" />
-          <span className="text-sm">{t('nav.logout')}</span>
+          <span className="text-sm">{t('layout.nav.logout')}</span>
         </Button>
       </div>
     </div>

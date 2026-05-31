@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -15,13 +15,19 @@ import { Input } from '@/components/ui/input';
 import { Bell, LogOut, Menu, Search, Settings, User } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
+import { useAuth } from '@/components/providers/auth-provider/AuthProvider';
 import { LanguageToggle } from './language-toggle/LanguageToggle';
 import { ThemeToggle } from './theme-toggle/ThemeToggle';
 
 export function DashboardHeader({ onSidebarToggle }: { onSidebarToggle: () => void }) {
-  const t = useTranslations('layout');
+  const t = useTranslations();
+  const [auth] = useAuth();
   const [searchOpen, setSearchOpen] = useState(false);
   const [hasNotifications] = useState(true);
+
+  const avatarSrc = auth?.avatar?.url;
+  const initials = auth?.username ? auth.username.slice(0, 2).toUpperCase() : 'AD';
 
   return (
     <>
@@ -36,7 +42,7 @@ export function DashboardHeader({ onSidebarToggle }: { onSidebarToggle: () => vo
               <div className="relative w-full">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
-                  placeholder={t('header.search_placeholder')}
+                  placeholder={t('layout.header.search_placeholder')}
                   className="pl-10 h-10 bg-sidebar border-border hover:bg-sidebar/80 transition-colors"
                   onClick={() => setSearchOpen(true)}
                 />
@@ -57,35 +63,39 @@ export function DashboardHeader({ onSidebarToggle }: { onSidebarToggle: () => vo
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                   <Avatar className="h-10 w-10">
-                    <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=Admin" />
-                    <AvatarFallback>AD</AvatarFallback>
+                    <AvatarImage key={avatarSrc} src={avatarSrc} />
+                    <AvatarFallback>{initials}</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <div className="flex items-center gap-3 px-3 py-2">
                   <Avatar className="h-10 w-10">
-                    <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=Admin" />
-                    <AvatarFallback>AD</AvatarFallback>
+                    <AvatarImage key={avatarSrc} src={avatarSrc} />
+                    <AvatarFallback>{initials}</AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col">
-                    <p className="text-sm font-medium">Admin User</p>
-                    <p className="text-xs text-muted-foreground">admin@portfolio.com</p>
+                    <p className="text-sm font-medium">{auth?.username ?? '—'}</p>
+                    <p className="text-xs text-muted-foreground">{auth?.email ?? '—'}</p>
                   </div>
                 </div>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <User className="w-4 h-4 mr-2" />
-                  {t('user.profile')}
+                <DropdownMenuItem asChild>
+                  <Link href="/profile" className="flex items-center">
+                    <User className="w-4 h-4 mr-2" />
+                    {t('layout.user.profile')}
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Settings className="w-4 h-4 mr-2" />
-                  {t('nav.settings')}
+                <DropdownMenuItem asChild>
+                  <Link href="/settings" className="flex items-center">
+                    <Settings className="w-4 h-4 mr-2" />
+                    {t('layout.nav.settings')}
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="text-destructive focus:text-destructive">
                   <LogOut className="w-4 h-4 mr-2" />
-                  {t('user.logout')}
+                  {t('layout.user.logout')}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -99,20 +109,20 @@ export function DashboardHeader({ onSidebarToggle }: { onSidebarToggle: () => vo
             <div className="flex items-center border-b border-border px-4">
               <Search className="w-4 h-4 text-muted-foreground mr-2" />
               <input
-                placeholder={t('header.search_dialog_placeholder')}
+                placeholder={t('layout.header.search_dialog_placeholder')}
                 className="flex h-12 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               />
             </div>
             <div className="overflow-y-auto max-h-80 p-4 space-y-2">
-              <p className="text-xs text-muted-foreground font-medium px-2 py-1.5">{t('header.quick_actions')}</p>
+              <p className="text-xs text-muted-foreground font-medium px-2 py-1.5">{t('layout.header.quick_actions')}</p>
               <div className="text-sm cursor-pointer p-2 rounded-lg hover:bg-accent transition-colors">
-                {t('header.new_user')}
+                {t('layout.header.new_user')}
               </div>
               <div className="text-sm cursor-pointer p-2 rounded-lg hover:bg-accent transition-colors">
-                {t('header.new_project')}
+                {t('layout.header.new_project')}
               </div>
               <div className="text-sm cursor-pointer p-2 rounded-lg hover:bg-accent transition-colors">
-                {t('header.new_blog_post')}
+                {t('layout.header.new_blog_post')}
               </div>
             </div>
           </Command>
@@ -121,3 +131,4 @@ export function DashboardHeader({ onSidebarToggle }: { onSidebarToggle: () => vo
     </>
   );
 }
+

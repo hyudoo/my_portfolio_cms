@@ -4,9 +4,13 @@ import { useState } from 'react';
 import { DashboardSidebar } from '@/components/dashboard/sidebar/Sidebar';
 import { DashboardHeader } from '@/components/dashboard/header/Header';
 import { DashboardMobileSidebar } from '@/components/dashboard/mobile-sidebar/MobileSidebar';
+import { useAuthReady } from '@/components/providers/auth-provider/AuthProvider';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const isAuthReady = useAuthReady();
+
+  if (!isAuthReady) return null;
 
   return (
     <div className="flex h-screen bg-background">
