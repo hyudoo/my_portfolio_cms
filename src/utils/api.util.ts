@@ -1,6 +1,11 @@
 import axios, { AxiosError, CreateAxiosDefaults } from 'axios';
-import { getSession } from 'next-auth/react';
-import { apiNotify } from '../components/providers/notify-provider/api-notify/apiNotify';
+import { apiNotify } from '../components/layouts/app-layout/notify-provider/api-notify/apiNotify';
+
+let _accessToken: string | null = null;
+
+export const setAccessToken = (token: string | null) => {
+  _accessToken = token;
+};
 
 declare module 'axios' {
   interface AxiosRequestConfig {
@@ -26,10 +31,10 @@ export const createApiInstance = (config: CreateAxiosDefaults) => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<any, any>) => {
-      const data = error.response?.data;
+      const code = error.response?.data?.code ?? '999999';
 
       if (!error.config?.silent) {
-        apiNotify.error(`api_error.${data.code}`);
+        apiNotify.error(`api_error.${code}`);
       }
       console.error(error);
 
@@ -49,10 +54,9 @@ export const api = createApiInstance({
   },
 });
 
-api.interceptors.request.use(async (config) => {
-  const session = await getSession();
-  if (session?.accessToken) {
-    config.headers.Authorization = `Bearer ${session.accessToken}`;
+api.interceptors.request.use((config) => {
+  if (_accessToken) {
+    config.headers.Authorization = `Bearer ${_accessToken}`;
   }
   return config;
 });
