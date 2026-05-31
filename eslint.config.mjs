@@ -2,7 +2,6 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
-import reactHooksPlugin from '@grncdr/eslint-plugin-react-hooks';
 
 export default defineConfig([
   ...nextVitals,
@@ -10,10 +9,6 @@ export default defineConfig([
   prettierRecommended,
 
   {
-    plugins: {
-      '@grncdr/react-hooks': reactHooksPlugin,
-    },
-
     languageOptions: {
       globals: {
         node: true,
@@ -45,20 +40,10 @@ export default defineConfig([
         },
       ],
 
-      'react-hooks/exhaustive-deps': 'off',
-
-      '@grncdr/react-hooks/exhaustive-deps': [
+      'react-hooks/exhaustive-deps': [
         'warn',
         {
           additionalHooks: '(useDebounceEffect|useMemoRef|useCtrl$)',
-          staticHooks: {
-            useStateRef: true,
-            useMemoRef: true,
-            useGeneratedRef: true,
-            useQuery: [false, true],
-            useDebounceFn: true,
-            useRerender: true,
-          },
         },
       ],
     },
