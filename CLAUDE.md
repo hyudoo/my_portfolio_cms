@@ -24,7 +24,7 @@ No test runner is configured yet.
 - **lucide-react** — icon library
 - **framer-motion** — animations
 - **Redux Toolkit 2** — global state; typed hooks (`useAppDispatch`, `useAppSelector`) from `src/redux/store/`
-- **Axios** — two instances: client-side `api` and server-side `serverApi()`
+- **Axios** — single client-side instance (`src/utils/api.util.ts`); every page is a Client Component that fetches via `useEffect`
 - **next-intl** — i18n with `vi` (Vietnamese) as the default locale
 - Path alias `@/*` → `src/*`
 - `cn()` from `@/lib/utils` combines Tailwind classes (clsx + tailwind-merge)
@@ -64,27 +64,21 @@ Implemented dashboard routes:
 
 ### Auth
 
-`AuthProvider` receives server-fetched auth data via `getAuthInfo()` (uses `serverApi`, cached with React `cache()`). Client hooks:
+`AuthProvider` (`src/components/providers/auth-provider/AuthProvider.tsx`) wraps NextAuth's `SessionProvider` and mirrors `useSession()` into a small context. Client hooks:
 - `useAuth()` — `[authUser, setAuthUser]` tuple
-- `useAuthUser()` — current user or undefined
+- `useAuthUser()` / `useAuthAccount()` — current user or undefined
+
+`src/utils/get-auth-info.util.ts` exposes a server-side `getAuthInfo()` wrapping NextAuth's `auth()`, but no page currently calls it — all pages are Client Components using `useSession()`/`useAuth()` instead.
 
 Cross-tab auth sync: a `storage` event on `StorageKey.AuthChanged` triggers a full page reload.
 
 ### API layer
 
-Two Axios instances:
-- `api` (`src/utils/api.util.ts`) — client-side; base URL `NEXT_PUBLIC_API_URL + /api`; auto-strips `undefined` params; shows error toasts on failure unless `config.silent = true`
-- `serverApi()` (`src/utils/server-api.util.ts`) — server-side only (`'use server'`); base URL `NEXT_PROXY_URL + /api`
+`api` (`src/utils/api.util.ts`) is the single Axios instance used everywhere. `baseURL = NEXT_PUBLIC_API_URL + '/api'`; with `NEXT_PUBLIC_API_URL=""` (the default in `.env`) this resolves to the relative path `/api`, so client requests hit the CMS's own Next.js origin. `next.config.ts` rewrites every `/api/:path` request (except `/api/next-auth/*`, which NextAuth's own route handler owns) to `${NEXT_PROXY_URL}/api/:path` server-side — this is the "proxy" that lets the browser talk to the backend same-origin (no CORS, cookies flow naturally) without the backend URL ever being exposed to the client. It auto-strips `undefined` params and shows error toasts on failure unless `config.silent = true`.
 
-Request modules live in `src/requests/` (e.g., `auth.request.ts`). Use `serverApi()` for Server Component data fetching and `api` for client-side mutations.
+Request modules live in `src/requests/` (e.g., `skill-category.request.ts`) and all call `api` directly — there is no separate server-side request layer.
 
-Use `concurrent()` from `@/utils/concurrent.util` to run multiple server-side fetches in parallel:
-
-```ts
-const [messages, auth] = await concurrent([getMessages, getAuthInfo]);
-```
-
-`concurrent.util.ts` also adds async array prototype methods: `forEachAsync`, `mapAsync`, `filterMapAsync`, and an in-place `sortBy` (lodash-backed).
+`src/utils/concurrent.util.ts` exports a `concurrent()` helper to run multiple async calls in parallel plus async array prototype methods (`forEachAsync`, `mapAsync`, `filterMapAsync`, an in-place `sortBy`) — currently unused by any page, but available.
 
 ### Notifications & modals
 
@@ -224,5 +218,5 @@ src/components/ui/avatar_card/AvatarCard.tsx        ✗  (underscore, not kebab)
 
 | Variable | Where used |
 |---|---|
-| `NEXT_PUBLIC_API_URL` | Client-side `api` instance base URL |
-| `NEXT_PROXY_URL` | Server-side `serverApi()` base URL |
+| `NEXT_PUBLIC_API_URL` | Client-side `api` instance base URL (leave empty to use the same-origin `/api` proxy) |
+| `NEXT_PROXY_URL` | Backend URL the Next.js rewrite in `next.config.ts` proxies `/api/*` to; also used directly by `src/auth.ts`'s Credentials provider |

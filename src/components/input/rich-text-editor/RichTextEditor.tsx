@@ -35,6 +35,7 @@ export function RichTextEditor({ value, onChange, placeholder, disabled }: Props
       <CKEditor
         editor={ClassicEditor}
         config={{
+          licenseKey: 'GPL',
           plugins: [
             Essentials,
             Undo,

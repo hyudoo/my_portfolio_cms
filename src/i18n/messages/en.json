@@ -254,6 +254,7 @@
         "icon": "Icon",
         "order": "Order",
         "skills_count": "Skills",
+        "language": "Language",
         "actions": "Actions",
         "empty": "No categories found"
       },
@@ -295,6 +296,7 @@
         "icon": "Icon",
         "order": "Order",
         "category": "Category",
+        "language": "Language",
         "actions": "Actions",
         "empty": "No skills found"
       },
@@ -348,6 +350,7 @@
         "name": "Category Name",
         "slug": "Slug",
         "order": "Order",
+        "language": "Language",
         "actions": "Actions",
         "empty": "No categories found"
       },
@@ -394,6 +397,7 @@
         "featured": "Featured",
         "featured_yes": "Featured",
         "order": "Order",
+        "language": "Language",
         "links": "Links",
         "live_link": "Live Demo",
         "github_link": "GitHub",

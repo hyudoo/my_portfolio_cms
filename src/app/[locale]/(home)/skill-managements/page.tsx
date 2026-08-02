@@ -151,6 +151,11 @@ export default function SkillManagementsPage() {
         header: t('skills.categories.table.skills_count'),
         render: (cat) => <Badge variant="secondary">{cat.skills?.length ?? 0}</Badge>,
       },
+      {
+        key: 'locale',
+        header: t('skills.categories.table.language'),
+        render: (cat) => <Badge variant="outline">{t(`common.locale_${cat.locale}`)}</Badge>,
+      },
     ],
     [t],
   );

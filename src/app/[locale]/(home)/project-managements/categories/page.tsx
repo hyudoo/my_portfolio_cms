@@ -5,6 +5,7 @@ import { OrderTable, type OrderTableColumn } from '@/components/common/order-tab
 import { ProjectCategoryForm } from '@/components/project/project-category-form/ProjectCategoryForm';
 import { notify } from '@/components/layouts/app-layout/notify-provider/NotifyProvider';
 import { TablePagination } from '@/components/common/table-pagination/TablePagination';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -170,6 +171,11 @@ export default function ProjectCategoriesPage() {
         key: 'slug',
         header: t('projects.categories.table.slug'),
         render: (cat) => <span className="text-muted-foreground text-sm font-mono">{cat.slug}</span>,
+      },
+      {
+        key: 'locale',
+        header: t('projects.categories.table.language'),
+        render: (cat) => <Badge variant="outline">{t(`common.locale_${cat.locale}`)}</Badge>,
       },
     ],
     [t],

@@ -7,6 +7,7 @@ import { notify } from '@/components/layouts/app-layout/notify-provider/NotifyPr
 import { SkillCategoryForm } from '@/components/skill/skill-category-form/SkillCategoryForm';
 import { SkillForm } from '@/components/skill/skill-form/SkillForm';
 import { TablePagination } from '@/components/common/table-pagination/TablePagination';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -224,6 +225,11 @@ export default function SkillCategoryDetailPage() {
             fallback={<span className="text-muted-foreground text-sm">—</span>}
           />
         ),
+      },
+      {
+        key: 'locale',
+        header: t('skills.skills_list.table.language'),
+        render: (skill) => <Badge variant="outline">{t(`common.locale_${skill.locale}`)}</Badge>,
       },
     ],
     [t],

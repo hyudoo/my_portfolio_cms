@@ -2,7 +2,7 @@ import { GetSettingResponse, UpdateSettingBody } from '../types/requests/setting
 import { api } from '../utils/api.util';
 
 export const settingRequest = {
-  get: async (locale: string = 'vi') => {
+  get: async (locale: string = 'en') => {
     const { data } = await api.get<GetSettingResponse>('/general-setting', { params: { locale } });
     return data;
   },

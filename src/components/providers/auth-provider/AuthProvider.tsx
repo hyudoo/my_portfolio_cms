@@ -15,8 +15,6 @@ export const useAuthAccount = () => useContext(AuthContext)[0];
 
 export const useAuthUser = () => useContext(AuthContext)[0];
 
-export const useAuthReady = () => useSession().status !== 'loading';
-
 function AuthContextProvider({ children }: { children: ReactNode }) {
   const { data: session, status } = useSession();
   const [auth, setAuth] = useState<AuthUser | undefined>(session?.user);

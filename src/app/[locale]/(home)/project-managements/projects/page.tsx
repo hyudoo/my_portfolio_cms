@@ -207,6 +207,11 @@ export default function ProjectsPage() {
           project.featured ? <Badge variant="secondary">{t('projects.projects_list.table.featured_yes')}</Badge> : null,
       },
       {
+        key: 'locale',
+        header: t('projects.projects_list.table.language'),
+        render: (project) => <Badge variant="outline">{t(`common.locale_${project.locale}`)}</Badge>,
+      },
+      {
         key: 'links',
         header: t('projects.projects_list.table.links'),
         render: (project) => (

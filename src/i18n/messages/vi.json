@@ -254,6 +254,7 @@
         "icon": "Icon",
         "order": "Thứ tự",
         "skills_count": "Số kỹ năng",
+        "language": "Ngôn ngữ",
         "actions": "Thao tác",
         "empty": "Không có danh mục nào"
       },
@@ -295,6 +296,7 @@
         "icon": "Icon",
         "order": "Thứ tự",
         "category": "Danh mục",
+        "language": "Ngôn ngữ",
         "actions": "Thao tác",
         "empty": "Không có kỹ năng nào"
       },
@@ -348,6 +350,7 @@
         "name": "Tên danh mục",
         "slug": "Slug",
         "order": "Thứ tự",
+        "language": "Ngôn ngữ",
         "actions": "Thao tác",
         "empty": "Không có danh mục nào"
       },
@@ -394,6 +397,7 @@
         "featured": "Nổi bật",
         "featured_yes": "Nổi bật",
         "order": "Thứ tự",
+        "language": "Ngôn ngữ",
         "links": "Liên kết",
         "live_link": "Xem trực tiếp",
         "github_link": "GitHub",

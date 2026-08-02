@@ -1,16 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { DashboardSidebar } from '@/components/dashboard/sidebar/Sidebar';
 import { DashboardHeader } from '@/components/dashboard/header/Header';
 import { DashboardMobileSidebar } from '@/components/dashboard/mobile-sidebar/MobileSidebar';
-import { useAuthReady } from '@/components/providers/auth-provider/AuthProvider';
+import { useRouter } from '@/i18n/navigation';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const isAuthReady = useAuthReady();
+  const { status } = useSession();
+  const router = useRouter();
 
-  if (!isAuthReady) return null;
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.replace('/login');
+    }
+  }, [status, router]);
+
+  if (status !== 'authenticated') return null;
 
   return (
     <div className="flex h-screen bg-background">

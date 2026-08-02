@@ -6,25 +6,42 @@ import { GeneralSettingsTab } from '@/components/settings/general-settings-tab/G
 import { SeoSettingsTab } from '@/components/settings/seo-settings-tab/SeoSettingsTab';
 import { SocialLinksTab } from '@/components/settings/social-links-tab/SocialLinksTab';
 import { notify } from '@/components/layouts/app-layout/notify-provider/NotifyProvider';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Language } from '@/enums/language.enum';
 import { settingRequest } from '@/requests/setting.request';
 import { SettingEntity } from '@/types/entities/setting.entity';
 import { UpdateSettingBody } from '@/types/requests/setting.type';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useState } from 'react';
 
+const CONTENT_LOCALE_STORAGE_KEY = 'contentLocale';
+
 export default function SettingsPage() {
   const t = useTranslations();
 
+  const [locale, setLocale] = useState<Language>(Language.En);
   const [setting, setSetting] = useState<SettingEntity | null>(null);
   const [saving, setSaving] = useState(false);
 
+  useEffect(() => {
+    const stored = localStorage.getItem(CONTENT_LOCALE_STORAGE_KEY);
+    if (stored && (Object.values(Language) as string[]).includes(stored)) {
+      setLocale(stored as Language);
+    }
+  }, []);
+
+  const handleLocaleChange = useCallback((value: Language) => {
+    localStorage.setItem(CONTENT_LOCALE_STORAGE_KEY, value);
+    setLocale(value);
+  }, []);
+
   const fetchSetting = useCallback(async () => {
     try {
-      const { setting } = await settingRequest.get();
+      const { setting } = await settingRequest.get(locale);
       setSetting(setting);
     } catch {}
-  }, []);
+  }, [locale]);
 
   useEffect(() => {
     fetchSetting();
@@ -34,14 +51,14 @@ export default function SettingsPage() {
     async (body: UpdateSettingBody) => {
       setSaving(true);
       try {
-        const { setting } = await settingRequest.update(body);
+        const { setting } = await settingRequest.update({ ...body, locale });
         setSetting(setting);
         notify.success(t('settings.messages.updated'));
       } finally {
         setSaving(false);
       }
     },
-    [t],
+    [t, locale],
   );
 
   if (!setting) {
@@ -55,9 +72,23 @@ export default function SettingsPage() {
 
   return (
     <div className="space-y-6 p-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">{t('settings.title')}</h1>
-        <p className="text-muted-foreground text-sm mt-1">{t('settings.subtitle')}</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">{t('settings.title')}</h1>
+          <p className="text-muted-foreground text-sm mt-1">{t('settings.subtitle')}</p>
+        </div>
+        <Select value={locale} onValueChange={handleLocaleChange}>
+          <SelectTrigger className="w-40">
+            <SelectValue placeholder={t('settings.general.locale_placeholder')} />
+          </SelectTrigger>
+          <SelectContent>
+            {Object.values(Language).map((lang) => (
+              <SelectItem key={lang} value={lang}>
+                {t(`common.locale_${lang}`)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <Tabs defaultValue="general">
         <TabsList>
